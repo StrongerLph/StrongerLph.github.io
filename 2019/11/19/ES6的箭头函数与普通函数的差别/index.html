@@ -23,7 +23,7 @@
 <meta property="og:description" content="ES6箭头函数与普通函数的区别随着ES6的在JS开发中的广泛运用，我们已经习惯性的在代码中使用它的一些新特性。而箭头函数作为使用频率较高的一个ES6新特性，在我们的代码中基本上是随处可见了。 要合理的使用箭头函数就需要弄清楚它与普通函数有什么区别，只有了解了它们存在的差异，才能在使用时更加的合理，即功能与需求契合完好。 那么用function定义的普通函数和箭头函数之间究竟存在哪些差异呢？下面就来">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-19T12:50:57.000Z">
-<meta property="article:modified_time" content="2020-06-21T14:49:01.592Z">
+<meta property="article:modified_time" content="2020-06-21T14:53:47.499Z">
 <meta property="article:author" content="一梦七年。">
 <meta property="article:tag" content="JS">
 <meta property="article:tag" content="ES6">
@@ -32,7 +32,7 @@
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1592751080991">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1592751581083">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -142,7 +142,7 @@
             <span class="custom-count articles">
                 文章
             </span>
-            <span class="count">8</span>
+            <span class="count">9</span>
         </div>
         <div>
             <span class="custom-count tags">
@@ -154,7 +154,7 @@
             <span class="custom-count categories">
                 分类
             </span>
-            <span class="count">4</span>
+            <span class="count">5</span>
         </div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -239,6 +239,13 @@
         
 
         <li class="category-list-item">
+          <a class="category-list-link" href="/categories/webpack/">webpack</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
           <a class="category-list-link" href="/categories/浏览器/">浏览器</a>
           <span class="category-list-count">1</span>
         </li>
@@ -290,15 +297,15 @@
       </li>
       
       <li>
+        <a href="/2020/03/11/%E5%9F%BA%E4%BA%8Ewebpack%E7%9A%84require.context()API%EF%BC%8C%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80Vue%E7%BB%84%E4%BB%B6/">基于webpack的require.context()API，批量自动注册全局Vue组件</a>
+      </li>
+      
+      <li>
         <a href="/2020/01/14/Vue%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%BB%84%E4%BB%B6%E5%BA%93%E5%AF%B9%E6%AF%94/">Vue的三个常见组件库对比</a>
       </li>
       
       <li>
         <a href="/2019/11/21/React%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93%E4%B9%8Bkey%E5%B1%9E%E6%80%A7/">React列表渲染之key属性</a>
-      </li>
-      
-      <li>
-        <a href="/2019/11/19/ES6%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%88%AB/">ES6箭头函数与普通函数的区别</a>
       </li>
       
     </ul>
@@ -346,6 +353,8 @@
     <h2 id="ES6箭头函数与普通函数的区别"><a href="#ES6箭头函数与普通函数的区别" class="headerlink" title="ES6箭头函数与普通函数的区别"></a>ES6箭头函数与普通函数的区别</h2><p>随着ES6的在JS开发中的广泛运用，我们已经习惯性的在代码中使用它的一些新特性。而箭头函数作为使用频率较高的一个ES6新特性，在我们的代码中基本上是随处可见了。</p>
 <p>要合理的使用箭头函数就需要弄清楚它与普通函数有什么区别，只有了解了它们存在的差异，才能在使用时更加的合理，即功能与需求契合完好。</p>
 <p>那么用function定义的普通函数和箭头函数之间究竟存在哪些差异呢？下面就来讲讲它们的差异，方便自己想不起来的时候查阅，也可以给正在学习这门语言的道友解答一下疑问。若有纰漏，还望各位指正，不胜感激。</p>
+<a id="more"></a>
+
 <p>那么下面进入正题。</p>
 <p>在ES6没有出现之前，我们定义函数通常是这样的:</p>
 <pre><code class="js">function fun() {
@@ -498,7 +507,7 @@ console.log(fun.prototype) //undefined</code></pre>
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1592751080992"></script>
+<script src="/js/app.js?v=1592751581084"></script>
   
 
 

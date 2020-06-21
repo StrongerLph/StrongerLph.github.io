@@ -32,7 +32,7 @@
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1592751080919">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1592751581119">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -142,7 +142,7 @@
             <span class="custom-count articles">
                 文章
             </span>
-            <span class="count">8</span>
+            <span class="count">9</span>
         </div>
         <div>
             <span class="custom-count tags">
@@ -154,7 +154,7 @@
             <span class="custom-count categories">
                 分类
             </span>
-            <span class="count">4</span>
+            <span class="count">5</span>
         </div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -239,6 +239,13 @@
         
 
         <li class="category-list-item">
+          <a class="category-list-link" href="/categories/webpack/">webpack</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
           <a class="category-list-link" href="/categories/浏览器/">浏览器</a>
           <span class="category-list-count">1</span>
         </li>
@@ -290,15 +297,15 @@
       </li>
       
       <li>
+        <a href="/2020/03/11/%E5%9F%BA%E4%BA%8Ewebpack%E7%9A%84require.context()API%EF%BC%8C%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80Vue%E7%BB%84%E4%BB%B6/">基于webpack的require.context()API，批量自动注册全局Vue组件</a>
+      </li>
+      
+      <li>
         <a href="/2020/01/14/Vue%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%BB%84%E4%BB%B6%E5%BA%93%E5%AF%B9%E6%AF%94/">Vue的三个常见组件库对比</a>
       </li>
       
       <li>
         <a href="/2019/11/21/React%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93%E4%B9%8Bkey%E5%B1%9E%E6%80%A7/">React列表渲染之key属性</a>
-      </li>
-      
-      <li>
-        <a href="/2019/11/19/ES6%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%88%AB/">ES6箭头函数与普通函数的区别</a>
       </li>
       
     </ul>
@@ -366,6 +373,53 @@
     </div>
     
     <div class="nexmoe-post">
+        <a href="/2020/03/11/%E5%9F%BA%E4%BA%8Ewebpack%E7%9A%84require.context()API%EF%BC%8C%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80Vue%E7%BB%84%E4%BB%B6/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="/assets/background.png" data-sizes="auto" alt="基于webpack的require.context()API，批量自动注册全局Vue组件" class="lazyload">
+                    <h1>基于webpack的require.context()API，批量自动注册全局Vue组件</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年03月11日</a>
+            <a><i class="nexmoefont icon-areachart"></i>605 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
+        </div>
+
+        <article>
+            
+                <h2 id="基于webpack的require-context-API，批量自动注册全局Vue组件"><a href="#基于webpack的require-context-API，批量自动注册全局Vue组件" class="headerlink" title="基于webpack的require.context()API，批量自动注册全局Vue组件"></a>基于webpack的require.context()API，批量自动注册全局Vue组件</h2><p>在vue的项目中，我们很多时候都会用到组件，有时候一个组件只用一次，有时候一个组件在很多地方都要用到。</p>
+<p>那么为了代码的简洁，以及避免我们开发时做更多的重复性的操作，对于那些会在很多地方都用到的组件，我们有必要将其注册为全局组件，以便一次注册，全局调用，免得不停的import。</p>
+<p>为了达到这个目的，我们需要一个专门放置全局组件的文件夹，以及一个处理文件夹中文件的js脚本。如下:</p>
+<pre><code class="js">// global-components.js
+import Vue from &#39;vue&#39;
+
+createApp(App).use(router).use(store).mount(&#39;#app&#39;)
+// 首字母大写函数
+function uppercaseFirstWord (str) {   return str.charAt(0).toUpperCase() + str.slice(1) }
+// 引入目录下的全部组件
+// 从左到右参数依次为： 读取的组件所在路径、是否包含子目录、过滤文件的正则
+const requireComponent = require.context(&#39;.&#39;, false, /\.vue$/)
+// 生成组件路径字符串数组并遍历
+requireComponent.keys().forEach(filePath =&gt; { 
+    // 获取到当前组件的配置   
+    const config = requireComponent(filePath)
+    // 将组件路径字符串格式化成正确的组件名   
+    const componentName = uppercaseFirstWord(filePath.replace(/^\.\//, &#39;&#39;).replace(/\.\w+$/, &#39;&#39;)) 
+    // 全局注册当前组件   
+    Vue.component(componentName, config.default || config) // 解析： // require.context返回一个webpackContext方法，该方法有3个属性： // id:上下文模块里面所包含的模块 id. 它可能在你使用 module.hot.accept 的时候被用到。 // keys:一个函数，它返回一个数组，由所有可能被上下文模块处理的请求组成。 // resolve:一个函数，它返回请求被解析后得到的模块id // 对于最后的config.default || config，解析请前往https://www.cnblogs.com/cangqinglang/p/10445256.html
+})</code></pre>
+<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/%E6%89%B9%E9%87%8F%E6%B3%A8%E5%86%8Cvue%E7%BB%84%E4%BB%B6.png" alt="批量注册vue组件" class="lazyload"></p>
+<p>如图，将上面的global-components.js文件放入commons文件夹下，然后将所有的全局组件也放在commons文件夹中，那么当我们启动vue项目时，就会自动注册commons文件夹中所有的全局组件，省去了每一次使用组件时都要手动引入注册等操作，从此一劳永逸。当然这也是不影响按需引入的，只要别把按需引入的组件放到这个文件夹下就行了。</p>
+<p>require.context能做的事还很多，例如注册路由等。</p>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
         <a href="/2020/01/14/Vue%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%BB%84%E4%BB%B6%E5%BA%93%E5%AF%B9%E6%AF%94/">
             
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
@@ -413,131 +467,6 @@
         </article>
     </div>
     
-    <div class="nexmoe-post">
-        <a href="/2019/11/19/ES6%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%88%AB/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="/assets/background.png" data-sizes="auto" alt="ES6箭头函数与普通函数的区别" class="lazyload">
-                    <h1>ES6箭头函数与普通函数的区别</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2019年11月19日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
-        </div>
-
-        <article>
-            
-                <h2 id="ES6箭头函数与普通函数的区别"><a href="#ES6箭头函数与普通函数的区别" class="headerlink" title="ES6箭头函数与普通函数的区别"></a>ES6箭头函数与普通函数的区别</h2><p>随着ES6的在JS开发中的广泛运用，我们已经习惯性的在代码中使用它的一些新特性。而箭头函数作为使用频率较高的一个ES6新特性，在我们的代码中基本上是随处可见了。</p>
-<p>要合理的使用箭头函数就需要弄清楚它与普通函数有什么区别，只有了解了它们存在的差异，才能在使用时更加的合理，即功能与需求契合完好。</p>
-<p>那么用function定义的普通函数和箭头函数之间究竟存在哪些差异呢？下面就来讲讲它们的差异，方便自己想不起来的时候查阅，也可以给正在学习这门语言的道友解答一下疑问。若有纰漏，还望各位指正，不胜感激。</p>
-<p>那么下面进入正题。</p>
-<p>在ES6没有出现之前，我们定义函数通常是这样的:</p>
-<pre><code class="js">function fun() {
-    // 具体代码
-} 
-
-// 或者是这样
-var fun = function() { 
-    // 具体代码
-}</code></pre>
-<p>我们在函数内部的具体代码中经常会使用到this这个值。这个值是什么呢？我之前在学习的时候看了一些网上的资料，有人说this是函数定义的域(也就是定义在哪个对象上)，这个值在定义的时候就确定了，后来在使用bind、apply、call的时候，我发现并不是这样的，因为它们改变了原函数中this的指向。之后我查阅了一些书籍资料后，发现this并不是在定义的时候就确定的，而是在调用的时候确定的，也就是谁调用这个函数，this就指向谁，我觉得这才更符合实际的this定义。比如说:</p>
-<pre><code class="js">function a(){
-    console.log(this);
-}
-
-a(); //Window对象
-
-// 这里的a() 实际上时window对象调用的 具体如下：
-function b(){
-    console.log(this);
-}
-
-window.b(); //Window // 实际上a()等价于window.a()，只不过默认可以省略window.罢了
-
-var obj = {};
-
-a.apply(obj); // {}
-
-// 这里我们运用apply函数，用obj来调用a函数，结果输出的是空对象obj</code></pre>
-<p>由此可见，普通函数中的this应该是在调用时确定的，而不是定义的时候就确定的，即普通函数被谁调用，this就指向谁。</p>
-<p>那么下面开始讲讲普通函数和箭头函数的差异:</p>
-<h4 id="1-箭头函数中的this与它所处作用域有关"><a href="#1-箭头函数中的this与它所处作用域有关" class="headerlink" title="1.箭头函数中的this与它所处作用域有关"></a>1.箭头函数中的this与它所处作用域有关</h4><pre><code class="js">var obj= {
-    fun1:function(){
-        console.log(this);
-    },
-    fun2:function(){
-        return function(){
-            console.log(this);
-        }
-    }
-}
-
-obj.fun1(); // obj
-obj.fun2()(); // window
-// 这里obj.fun2()() 等价于 window.obj.fun2()()</code></pre>
-<p>那么如果把fun2里的普通函数换成箭头函数会怎么样呢？</p>
-<pre><code class="js">var obj= {
-    fun1: function(){
-        console.log(this);
-    },
-    fun2: function(){
-        return () =&gt; {
-            console.log(this);
-        }
-    }
-}
-
-obj.fun1(); // obj
-obj.fun2()(); // obj
-
-// 由此可见，箭头函数中的this继承了它所在的作用域的this</code></pre>
-<h4 id="2-普通函数中有arguments，箭头函数中没有，而是用三点运算符替代"><a href="#2-普通函数中有arguments，箭头函数中没有，而是用三点运算符替代" class="headerlink" title="2.普通函数中有arguments，箭头函数中没有，而是用三点运算符替代"></a>2.普通函数中有arguments，箭头函数中没有，而是用三点运算符替代</h4><pre><code class="js">// 普通函数
-function a(params) {
-    console.log(arguments[0]);
-}
-
-a(1); // 输出： 1
-
-// 箭头函数
-var a = (params) =&gt; {
-    console.log(arguments);
-}
-
-a(1); // 报错：arguments is not defined
-
-// 替代方式：
-var a = (...arg) =&gt; {
-    console.log(arg[0]);
-}
-
-a(1); // 输出：1</code></pre>
-<h4 id="3-箭头函数不能和new一起使用，但普通函数可以"><a href="#3-箭头函数不能和new一起使用，但普通函数可以" class="headerlink" title="3.箭头函数不能和new一起使用，但普通函数可以"></a>3.箭头函数不能和new一起使用，但普通函数可以</h4><pre><code class="js">// 普通函数列子略 ··· 
-
-// 箭头函数
-
-var fun = () =&gt; {};
-
-var fun1 = new fun(); //fun is not a constructor
-
-// 原因是箭头函数不能作为构造器使用</code></pre>
-<h4 id="4-箭头函数没有原型prototype，但是普通函数有"><a href="#4-箭头函数没有原型prototype，但是普通函数有" class="headerlink" title="4.箭头函数没有原型prototype，但是普通函数有"></a>4.箭头函数没有原型prototype，但是普通函数有</h4><pre><code class="js">// 普通函数
-function fun() {};
-console.log(fun.prototype) // {constructor: ƒ...}
-
-// 箭头函数
-var fun = () =&gt; {};
-console.log(fun.prototype) //undefined</code></pre>
-<p>那么以上就是我自己觉得箭头函数和普通函数比较重要的几个差异，当然还有一些其他差异，这里就没有都一一列出来了。</p>
-<p>由此可见，在使用箭头函数的时候还是有很多地方要注意的，一旦滥用箭头函数很可能让自己的代码陷入困境。</p>
-
-            
-        </article>
-    </div>
-    
 </section>
 
     <nav class="nexmoe-page-nav">
@@ -553,7 +482,7 @@ console.log(fun.prototype) //undefined</code></pre>
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1592751080921"></script>
+<script src="/js/app.js?v=1592751581121"></script>
   
 
 
