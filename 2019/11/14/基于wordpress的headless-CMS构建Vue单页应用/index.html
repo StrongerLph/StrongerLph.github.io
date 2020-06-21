@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" >
+
+<head>
+  
+  <title>基于wordpress的headless CMS构建Vue单页应用 - 一梦七年。的博客</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="一派青春撞了南墙，一生热爱回头太难。">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="R9GProVFnk" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="基于wordpress的headless CMS构建Vue单页应用特别说明:本文翻译自Build a Vue.js SPA on Top of Headless WordPress，如需更多了解，请前往原文阅读。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于wordpress的headless CMS构建Vue单页应用">
+<meta property="og:url" content="https://lonelyph.github.io/2019/11/14/%E5%9F%BA%E4%BA%8Ewordpress%E7%9A%84headless-CMS%E6%9E%84%E5%BB%BAVue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8/">
+<meta property="og:site_name" content="一梦七年。的博客">
+<meta property="og:description" content="基于wordpress的headless CMS构建Vue单页应用特别说明:本文翻译自Build a Vue.js SPA on Top of Headless WordPress，如需更多了解，请前往原文阅读。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lonelyph.github.io/assets/images/wordpress-as-headless-cms.webp">
+<meta property="og:image" content="https://lonelyph.github.io/assets/images/vuejs-wordpress.webp">
+<meta property="og:image" content="https://lonelyph.github.io/assets/images/wordpress-acf-plugin.webp">
+<meta property="og:image" content="https://lonelyph.github.io/assets/images/wordpress-headless-custom-fields.webp">
+<meta property="og:image" content="https://lonelyph.github.io/assets/images/wordpress-headless-posts.webp">
+<meta property="article:published_time" content="2019-11-14T08:50:57.000Z">
+<meta property="article:modified_time" content="2020-06-21T10:20:52.144Z">
+<meta property="article:author" content="一梦七年。">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="wordpress">
+<meta property="article:tag" content="headless-CMS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lonelyph.github.io/assets/images/wordpress-as-headless-cms.webp">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
+    crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1592734904430">-->
+
+  <!-- 自定义样式 -->
+  <style>
+    .custom-nexmoe-bg {
+      opacity: 1 !important;
+      filter: blur(5px) !important;
+    }
+
+    ::-webkit-scrollbar {
+      width: 0;
+      background: transparent !important;
+    }
+
+    @media screen and (max-width:1024px) {
+      .mdui-appbar.mdui-shadow-0 {
+        background: rgba(255, 0, 0);
+      }
+    }
+  </style>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left custom-body-bg">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg custom-nexmoe-bg" style="background-image: url(/assets/background.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i
+            class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="一梦七年。" class="mdui-btn mdui-btn-icon"><img
+            src="/assets/avatar.jpg" alt="一梦七年。"></a>
+      </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+    <style>
+    .description {
+        width: 230px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 12px;
+        padding: 5px 5px;
+        margin-bottom: 30px;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .custom-nexmoe-count {
+        padding: 0 15px !important;
+    }
+
+    .custom-nexmoe-count :nth-child(2) {
+        margin: 0 15px;
+    }
+
+    .custom-count {
+        display: inline-block;
+        padding: 5px 0;
+        border-radius: 15px;
+        color: #fff !important;
+    }
+
+    .articles,
+    .articles + .count{
+        background-color: #00dbff;
+    }
+
+    .tags,
+    .tags + .count {
+        background-color: #33d57a;
+    }
+
+    .categories,
+    .categories + .count {
+        background-color: #ff761e;
+    }
+
+    .custom-nexmoe-count .count {
+        margin: 5px auto;
+        color: #fff !important;
+        border-radius: 10px;
+    }
+
+</style>
+
+<div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="一梦七年。">
+            <img src="/assets/avatar.jpg" alt="一梦七年。"
+                alt="一梦七年。">
+        </a>
+    </div>
+    
+    <div class="description">
+        <span>一派青春撞了南墙，一生热爱回头太难。</span>
+    </div>
+    
+    <div class="nexmoe-count custom-nexmoe-count">
+        <div>
+            <span class="custom-count articles">
+                文章
+            </span>
+            <span class="count">7</span>
+        </div>
+        <div>
+            <span class="custom-count tags">
+                标签
+            </span>
+            <span class="count">16</span>
+        </div>
+        <div>
+            <span class="custom-count categories">
+                分类
+            </span>
+            <span class="count">1</span>
+        </div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/"
+            title="回到首页">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives"
+            title="文章归档">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about"
+            title="关于博客">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=https://lonelyph.github.io" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/318257003" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/LonelyPH" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/lonelyph" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: #1e88e5;background-color: rgba(30,136,229,.1);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随笔/">随笔</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Ant-Design-of-Vue/" style="font-size: 10px;">Ant Design of Vue</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vant/" style="font-size: 10px;">Vant</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/element-ui/" style="font-size: 10px;">element-ui</a> <a href="/tags/headless-CMS/" style="font-size: 10px;">headless-CMS</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 10px;">组件库</a> <a href="/tags/%E8%85%BE%E8%AE%AFAI/" style="font-size: 10px;">腾讯AI</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/" style="font-size: 10px;">身份证识别</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a>
+    </div>
+    
+  </div>
+
+  
+  
+<style>
+  .nexmoe-widget .article-list a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+</style>
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">最新文章</h3>
+  <div class="nexmoe-widget">
+    <ul class="article-list">
+      
+      <li>
+        <a href="/2020/06/21/new_blog/">换新博客了！服务器耗不起，github托管吧！</a>
+      </li>
+      
+      <li>
+        <a href="/2020/03/11/%E5%BC%82%E6%AD%A5%E6%89%A7%E8%A1%8C%E7%9A%84location-href/">异步执行的location.href</a>
+      </li>
+      
+      <li>
+        <a href="/2020/01/14/Vue%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%BB%84%E4%BB%B6%E5%BA%93%E5%AF%B9%E6%AF%94/">Vue的三个常见组件库对比</a>
+      </li>
+      
+      <li>
+        <a href="/2019/11/21/React%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93%E4%B9%8Bkey%E5%B1%9E%E6%80%A7/">React列表渲染之key属性</a>
+      </li>
+      
+      <li>
+        <a href="/2019/11/14/%E5%9F%BA%E4%BA%8Ewordpress%E7%9A%84headless-CMS%E6%9E%84%E5%BB%BAVue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8/">基于wordpress的headless CMS构建Vue单页应用</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 一梦七年。
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+      <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="/assets/background.png" data-sizes="auto" alt="基于wordpress的headless CMS构建Vue单页应用" class="lazyload">
+          <h1>基于wordpress的headless CMS构建Vue单页应用</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2019年11月14日</a>
+    <a><i class="nexmoefont icon-areachart"></i>3.4k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 15 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基于wordpress的headless-CMS构建Vue单页应用"><span class="toc-number">1.</span> <span class="toc-text">基于wordpress的headless CMS构建Vue单页应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#教程-Headless-WordPress-绑定到一个vue单页应用"><span class="toc-number">1.0.1.</span> <span class="toc-text">教程: Headless WordPress 绑定到一个vue单页应用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、在wordpress中创建自定义字段模板"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">1、在wordpress中创建自定义字段模板</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、构建自定义端点"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">2、构建自定义端点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、创建Vue单页应用"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">3、创建Vue单页应用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">总结:</span></a></li></ol></li></ol></li></ol></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <h2 id="基于wordpress的headless-CMS构建Vue单页应用"><a href="#基于wordpress的headless-CMS构建Vue单页应用" class="headerlink" title="基于wordpress的headless CMS构建Vue单页应用"></a>基于wordpress的headless CMS构建Vue单页应用</h2><p>特别说明:本文翻译自<a href="https://snipcart.com/blog/wordpress-vue-headless" target="_blank" rel="noopener">Build a Vue.js SPA on Top of Headless WordPress</a>，如需更多了解，请前往原文阅读。</p>
+<a id="more"></a>
+
+<p>难以置信，我又要开始写关于wordpress的东西了。</p>
+<p>开个玩笑，事实上，在我最后一次使用wordpress的rest api时，我还觉得它非常的酷。</p>
+<p>看到如此庞大的网络产业向现代趋势和新范式开放，还真是让人耳目一新。所以，我想知道如果把我最喜欢的前端框架Vue和wordpress结合起来会不会很有趣呢？</p>
+<p>事实证明，这当然是非常有趣的。</p>
+<p>在本文中，我将对这个技术栈进行更深入的讲解。本教程将涵盖以下几个方面:</p>
+<ol>
+<li>在wordpress中使用自定义字段来创建模型。</li>
+<li>将WP REST API构建成自定义端点。</li>
+<li>创建一个Vue单页面应用。</li>
+<li>将这个应用进行托管。</li>
+</ol>
+<p>首先，明确一下使用wordpress作为一个headless CMS。</p>
+<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/wordpress-as-headless-cms.webp" alt="Monolithic CMS vs Headless CMS" class="lazyload"></p>
+<p>在用一个具体的wordpress例子进行深入研究前，先确保我们对Headless CMS的理解是一致的。</p>
+<p>一直到几年前，我们还习惯于使用传统的CMSs，它们管理前端和后端以及前端和后端之间所有的东西，包括前端的页面、后端的数据、角色权限等等。然而，由于前端的现代化的兴起，也引发了这一重大的转变。前端现代化产生的生态圈中，根本没有多余的位置存放这些老旧、单一的CMSs，替代它们的将会是静态站点生成器、以API为中心的微服务和无服务架构。</p>
+<p>但是，这并不意味着想wordpress这样的东西就该退出历史舞台了，这只是说明它们需要谋求变革，它们不应该在管理网站的所有东西，因为现在有很多工具在某些方面做的更好。</p>
+<p>所以，为什么不用wordpress来做它真正擅长的东西呢？而这正是自wordpress4.7发布的WP REST API支持的。它允许在wordpress后台注入的内容被用于前端应用，不论涉及到什么技术。</p>
+<p>这将是一场游戏的变革。</p>
+<p>我敢肯定，如果你是一个只有一点点wordpress经验的开发者，你应该已经注意到这场变革带来的新的机遇了。</p>
+<p>顺便说一下，开发人员多年来一直抱怨的问题，WordPress的主要缺点：开发很不自由，而且模板定制很麻烦。但是如果只使用WordPress作为后台来开发应用，那这些问题不仅可以抛之脑后了，还会在开发速度上得到一个大的提升:</p>
+<ul>
+<li>开发人员可以在模块化的自由地使用他们喜欢的工具，这将使得项目具有高可扩展性，而且，这样也会带来更好的性能。</li>
+<li>不再需要去处理WP的模板，将它插入到你喜欢的前端，而无需担心覆盖基于php的模板，因为从头开始构建强大的用户界面要容易得多，然后就可以使用WordPress的数据了。</li>
+</ul>
+<p>为什么会选择在wordpress中使用Vue呢？</p>
+<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/vuejs-wordpress.webp" alt="vuejs-wordpress" class="lazyload"></p>
+<p>在过去，把wordpress和JS框架结合在一起以供我们在应用程序中使用WordPress也许会给你带来很大的困难，但是，想想多设备应用程序、物联网、先进的网络应用程序和其他现代实践。</p>
+<p>除了我已经在我的第一个WP headless demo中使用了React这一事实外，我还有很多理由向那些寻找合适前端框架的人推荐Vue.js。</p>
+<p>你可能听到人们讨论Vue最多的是它的模块化、速度和高性能。我想说这些都是绝对正确的，你可以放心，我不是在这里胡说，在Snipcart，甚至使用它来支持我们最新版本的购物车。</p>
+<p>而且，这种新兴技术的构建工具一天比一天成熟。就像JavaScript生态系统一样，Vue的生态圈也在不断扩大。现在几乎任何类型的前端项目都有基于它的工具。以下是你应该关注的主要问题:</p>
+<ul>
+<li><p><a href="https://nuxtjs.org/" target="_blank" rel="noopener">Nuxt: </a> 一个引人注目的静态站点生成、单页应用程序(SPA)开发和服务器端渲染的框架。在本教程中，我们使用它在headless CMS的基础上构建了一个静态站点。</p>
+</li>
+<li><p><a href="https://gridsome.org/" target="_blank" rel="noopener">Gridsome: </a> 相当于 Vue中的Gatsby(基于React的开源框架)。由GraphQL支持从任何来源获取数据，包括headless CMS。它可以生成渐进式Web应用程序(PWA)。</p>
+</li>
+<li><p><a href="https://vuepress.vuejs.org/" target="_blank" rel="noopener">VuePress: </a> 一个极简的基于Vue的静态网站生成器，拥有完整的学习文档和博客。</p>
+</li>
+</ul>
+<p>SEO是个问题吗？</p>
+<p>SEO是最需要被优化的，以传统的方式使用WordPress的一个好处是你不用太担心SEO。因此，当我们听说JS框架在seo方面不是很好时，我可以理解为什么人们不愿意使用它。</p>
+<p>但是让我们彻底澄清一下。实际上，如果你处理得当，你可以用Vue取得很好的SEO结果。使用Nuxt.js进行服务器端呈现是一种方法，但是您也可以使用简单的预渲染服务，就像我们在<a href="https://snipcart.com/blog/vue-js-seo-prerender-example" target="_blank" rel="noopener">这里</a>所做的一样。</p>
+<p>然后，更好的性能和用户体验实际上将会提高你的SEO效果。</p>
+<h4 id="教程-Headless-WordPress-绑定到一个vue单页应用"><a href="#教程-Headless-WordPress-绑定到一个vue单页应用" class="headerlink" title="教程: Headless WordPress 绑定到一个vue单页应用"></a>教程: Headless WordPress 绑定到一个vue单页应用</h4><p>主要内容:</p>
+<p>我们的团队正在扩张，但是这其中也包含了在一些成员居住的城市扩张。所以假设我们很难在按比例计算时去记住每个成员的位置，我将创建一个应用程序，用来跟踪每个成员的位置，并在交互式地图上标记出他们的位置坐标。</p>
+<p>我将向你展示如何制作一个响应式的Vue单页应用来实现这个功能。后端部分非常类似我之前的一篇wordpress与React结合使用的文章中提到的，但这次，我将以不同的方式在vue单页应用中使用这些数据。</p>
+<p>预备条件：</p>
+<ul>
+<li><p>一个正在运行的wordpress实例</p>
+</li>
+<li><p>vue基础</p>
+</li>
+<li><p>一个免费的MapBox账号</p>
+</li>
+</ul>
+<h5 id="1、在wordpress中创建自定义字段模板"><a href="#1、在wordpress中创建自定义字段模板" class="headerlink" title="1、在wordpress中创建自定义字段模板"></a>1、在wordpress中创建自定义字段模板</h5><p>让我们直接进入WordPress管理页面。我将使用ACF (Advanced Custom Fields)插件来演示如何创建自定义字段模板。这个插件允许你添加自定义字段到原生WordPress实体中，比如post。它经过了较为完整的测试，非常稳定，并且在向页面添加自定义数据时可以快速启动。您可以使用WordPress仪表板中的Plugins选项卡轻松地安装它。下面就是你需要下载的这个插件:</p>
+<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/wordpress-acf-plugin.webp" alt="ACF" class="lazyload"></p>
+<p>对于这个例子，您将需要四个字段:两个坐标、一个名称和一个图像。下面是它在仪表板上的样子:</p>
+<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/wordpress-headless-custom-fields.webp" alt="ACF-Custom-Fields" class="lazyload"></p>
+<p>现在你可以添加自定义数据到你的WordPress文章中，让我们使用它们来创建标记来显示团队成员的居住位置。以下是新创建的帖子列表:</p>
+<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/wordpress-headless-posts.webp" alt="ACF-Custom-Fields" class="lazyload"></p>
+<h5 id="2、构建自定义端点"><a href="#2、构建自定义端点" class="headerlink" title="2、构建自定义端点"></a>2、构建自定义端点</h5><p>现在你已经拥有了你想要的数据，你还需要将它向公众开放，以便可以通过REST API来访问到这些数据。</p>
+<p>为此，还需要构建一个自定义端点。打开WordPress文件夹并打开functions.php文件，这是你将注册新端点的地方。将下面的几行代码添加达到文件末尾:</p>
+<pre><code class="php">function  markers_endpoint( $request_data ) {
+    $args = array(
+        &#39;post_type&#39; =&gt; &#39;post&#39;,
+        &#39;posts_per_page&#39;=&gt;-1, 
+        &#39;numberposts&#39;=&gt;-1
+    );
+
+    $posts = get_posts($args);
+    foreach ($posts as $key =&gt; $post) {
+        $posts[$key]-&gt;acf = get_fields($post-&gt;ID);
+    }
+    return  $posts;
+}
+
+add_action( &#39;rest_api_init&#39;, function () {
+    register_rest_route( &#39;markers/v1&#39;, &#39;/post/&#39;, array(
+        &#39;methods&#39; =&gt; &#39;GET&#39;,
+        &#39;callback&#39; =&gt; &#39;markers_endpoint&#39;
+    ));
+});</code></pre>
+<p>add_action方法创建自定义端点，并通过rest_api_init钩子注册它。调用端点后，将执行回调，并在acf字段下返回你的自定义字段。</p>
+<p>以下将是你在GET请求后得到的返回结果:</p>
+<pre><code class="json">[
+    {
+        &quot;ID&quot;: 19,
+        &quot;post_author&quot;: &quot;1&quot;,
+        &quot;post_date&quot;: &quot;2019-03-14 15:48:40&quot;,
+        &quot;post_date_gmt&quot;: &quot;2019-03-14 19:48:40&quot;,
+        &quot;post_content&quot;: &quot;&quot;,
+        &quot;post_title&quot;: &quot;Chuck&quot;,
+        &quot;post_excerpt&quot;: &quot;&quot;,
+        &quot;post_status&quot;: &quot;publish&quot;,
+        &quot;comment_status&quot;: &quot;open&quot;,
+        &quot;ping_status&quot;: &quot;open&quot;,
+        &quot;post_password&quot;: &quot;&quot;,
+        &quot;post_name&quot;: &quot;chuck&quot;,
+        &quot;to_ping&quot;: &quot;&quot;,
+        &quot;pinged&quot;: &quot;&quot;,
+        &quot;post_modified&quot;: &quot;2019-03-14 15:48:41&quot;,
+        &quot;post_modified_gmt&quot;: &quot;2019-03-14 19:48:41&quot;,
+        &quot;post_content_filtered&quot;: &quot;&quot;,
+        &quot;post_parent&quot;: 0,
+        &quot;guid&quot;: &quot;http:\/\/localhost\/wordpress\/?p=19&quot;,
+        &quot;menu_order&quot;: 0,
+        &quot;post_type&quot;: &quot;post&quot;,
+        &quot;post_mime_type&quot;: &quot;&quot;,
+        &quot;comment_count&quot;: &quot;0&quot;,
+        &quot;filter&quot;: &quot;raw&quot;,
+        &quot;acf&quot;: {
+            &quot;Name&quot;: &quot;Chuck&quot;,
+            &quot;image&quot;: &quot;http:\/\/localhost\/wordpress\/wp-content\/uploads\/2019\/03\/charles-snipcart.png&quot;,
+            &quot;longitude&quot;: &quot;49.8951&quot;,
+            &quot;Latitude&quot;: &quot;97.1384&quot;
+        }
+    }, ...
+]</code></pre>
+<h5 id="3、创建Vue单页应用"><a href="#3、创建Vue单页应用" class="headerlink" title="3、创建Vue单页应用"></a>3、创建Vue单页应用</h5><p>让我们即刻将这些新出炉的数据用起来。</p>
+<p>首先构建一个vue项目，如果你还不知道如何构建vue项目或者不知道如何使用相关插件，请先移步到<a href="https://cli.vuejs.org/zh/guide/creating-a-project.html" target="_blank" rel="noopener">这里了解如何构建vue项目这里了解如何构建vue项目</a>。以下内容我们将假设你已经会使用vue并对相关的类容有一定的了解。</p>
+<p>接着，创建你的项目：vue create markers。</p>
+<p>首先要做的是在App组件中请求API并获取数据。为此，只需向组件添加以下声明:</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+
+    &lt;div class=&quot;badge-container&quot;&gt;
+      &lt;div v-for=&quot;badge in markers&quot; :key=&quot;badge.name&quot;&gt;
+        &lt;Badge :name=&quot;badge.name&quot; :image=&quot;badge.image&quot; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;Map v-if=&quot;markers.length &gt; 0&quot; :markers=&quot;markers&quot; /&gt;
+
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Badge from &#39;./components/Badge.vue&#39;
+import Map from &#39;./components/Map.vue&#39;
+export default {
+  name: &#39;app&#39;,
+  data(){
+    return {
+      markers: []
+    }
+  },
+  components: {
+    Badge,
+    Map
+  },
+  mounted(){
+    fetch(&#39;https://wordpress-vue.herokuapp.com/index.php/wp-json/markers/v1/post&#39;)
+      .then((r) =&gt; r.json())
+      .then((res) =&gt; this.markers = res.map(x =&gt; x.acf));
+  }
+}</code></pre>
+<p>有了数据之后，让我们创建第一个组件(在components文件夹中)，命名为Badge。代码如下:</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div class=&quot;badge&quot; :id=&quot;name&quot;&gt;
+    &lt;img :src=img width=500/&gt;
+    &lt;h2&gt;{{ name }}&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &#39;Badge&#39;,
+  props: {
+    Name: String,
+    Image: String
+  }
+}
+&lt;/script&gt;
+
+&lt;!-- Add &quot;scoped&quot; attribute to limit CSS to this component only --&gt;
+&lt;style scoped&gt;
+
+&lt;/style&gt;</code></pre>
+<p>让我们回到应用程序组件，导入Badge组件，并在组件对象中注册它:</p>
+<pre><code class="js">components: {
+    Badge
+}</code></pre>
+<p>接着，我们再创建一个新 组件Map.vue。在这里，我将使用Mapbox来显示地图。他们有免费的版本，整洁和完整的文档…我不能要求更多了。一旦您创建了一个帐户，您将能够直接访问仪表板主页地址：<a href="https://account.mapbox.com/" target="_blank" rel="noopener">https://account.mapbox.com/</a>。</p>
+<p>首先，在你的index.html文件中直接引入Mapbox的JS和CSS:</p>
+<pre><code class="html">&lt;meta name=&#39;viewport&#39; content=&#39;initial-scale=1,maximum-scale=1,user-scalable=no&#39; /&gt;
+&lt;script src=&#39;https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js&#39;&gt;&lt;/script&gt;
+&lt;link href=&#39;https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css&#39; rel=&#39;stylesheet&#39; /&gt;</code></pre>
+<p>然后像下面这样定义Map组件:</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+      &lt;div id=&#39;map&#39; class=&#39;map&#39;&gt; &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+
+export default {
+  name: &#39;Map&#39;,
+  mounted(){
+
+    window.mapboxgl.accessToken = &quot;{YOUR_MAPBOX_ACCESS_TOKEN}&quot;;    
+
+    var map = new window.mapboxgl.Map({
+        container: &#39;map&#39;,
+        style: &#39;mapbox://styles/mapbox/dark-v9&#39;,
+        center: [-81.4608, 48.4758], 
+        zoom: 4
+    });
+
+    map.on(&#39;load&#39;, (() =&gt; {
+
+        this.markers.forEach(function(marker) {
+            var el = document.createElement(&#39;div&#39;);
+            el.className = &#39;marker&#39;;
+
+            new window.mapboxgl.Marker(el)
+                .setLngLat([parseFloat(marker.latitude), parseFloat(marker.longitude)])
+                .addTo(map);
+        });
+
+        this.markers.forEach((x) =&gt; {
+            document.getElementById(x.name)
+                .addEventListener(&#39;click&#39;, () =&gt; {
+                    map.flyTo({
+                        center: [parseFloat(x.latitude), parseFloat(x.longitude)],
+                        zoom: 9
+                    })
+                ;}
+            )
+        })
+
+    }).bind(this));
+  },
+  props: {
+   markers: Array
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+.marker {
+  background-image: url(&#39;./../assets/mapbox-icon.png&#39;);
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+&lt;/style&gt;</code></pre>
+<p>正如你所看到的，Map组件的props只需要接受一个markers属性，这个属性是一个包含所有信息的数组。你需要将自己的accessToken绑定上，然后给map对象绑定load事件，这样就能确保在map对象加载完毕后才开始读取并展现markers数组中的数据。</p>
+<p>接着用css做一个定位的标记，并把它添加到map中。最后你要做的就是给每一个Badge绑定点击事件，以实现点击对应的Badge时，地图能定位到对应的位置。</p>
+<p>到这里我们就完成了整个应用的功能，你可以在wordpress后台添加或删除你的自定义字段，你的应用会自动加载你修改的数据。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h5><p>通过将wordpress作为一个headless CMs，你只需要专注于你的前端界面的开发，而不需要单独去维护一个服务器，你的数据可以保存在wordpress中，你也可以通过wordpress的控制面板对你的数据进行操作，这种方式能让你快速开发出一个全新的网站。如果你对此感兴趣，你还可以了解到更多wordpress的东西，甚至你不需要自己去写php的代码了，很多插件都可以解决本例中php代码的部分。</p>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/Vue/" rel="tag">Vue</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/headless-CMS/" rel="tag">headless-CMS</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/wordpress/" rel="tag">wordpress</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>一梦七年。<br>
+    <strong>本文链接：</strong><a href="https://lonelyph.github.io/2019/11/14/%E5%9F%BA%E4%BA%8Ewordpress%E7%9A%84headless-CMS%E6%9E%84%E5%BB%BAVue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8/" title="https:&#x2F;&#x2F;lonelyph.github.io&#x2F;2019&#x2F;11&#x2F;14&#x2F;%E5%9F%BA%E4%BA%8Ewordpress%E7%9A%84headless-CMS%E6%9E%84%E5%BB%BAVue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;lonelyph.github.io&#x2F;2019&#x2F;11&#x2F;14&#x2F;%E5%9F%BA%E4%BA%8Ewordpress%E7%9A%84headless-CMS%E6%9E%84%E5%BB%BAVue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8&#x2F;</a><br>
+    
+      <strong>声明：本博客旨在记录学习网络、编程技术以及随笔。</strong>
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'fe1e2afb500870f00186',
+        clientSecret: '0da33dc79b88d4e6eb9beb3510484764a4142bcf',
+        id: window.location.pathname,
+        repo: 'lonelyph.github.io',
+        owner: 'LonelyPH',
+        admin: 'LonelyPH'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+<script src="/js/app.js?v=1592734904431"></script>
+  
+
+
+
+
+
+</body>
+
+</html>

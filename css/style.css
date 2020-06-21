@@ -73,6 +73,9 @@ body {
   display: block;
   height: 0;
 }
+#nexmoe-header .nexmoe-description {
+  margin-bottom: 30px;
+}
 #nexmoe-header .nexmoe-count {
   padding: 0 30px;
   margin-bottom: 30px;
