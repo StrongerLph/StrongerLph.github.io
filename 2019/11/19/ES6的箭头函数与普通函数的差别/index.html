@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>关于 - 一梦七年。的博客</title>
+  <title>ES6箭头函数与普通函数的区别 - 一梦七年。的博客</title>
   <meta charset="UTF-8">
   <meta name="description" content="一派青春撞了南墙，一生热爱回头太难。">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -15,26 +15,24 @@
     <meta name="baidu-site-verification" content="R9GProVFnk" />
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="关于我 网名: 一梦七年。 出生于1994年6月 毕业于湖南工程学院，电子信息工程专业 目前从事web前端开发工作 当前坐标 -- 东莞 爱自由，爱技术，活到老，学到老  博客相关 创建时间: 2020年06月20号 托管: Github Pages 构建工具: node + git + Hexo + nexmoe 用途: 学习笔记、生活笔记  更多关于建设中···">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="https://lonelyph.github.io/about/">
+  <meta name="description" content="ES6箭头函数与普通函数的区别随着ES6的在JS开发中的广泛运用，我们已经习惯性的在代码中使用它的一些新特性。而箭头函数作为使用频率较高的一个ES6新特性，在我们的代码中基本上是随处可见了。 要合理的使用箭头函数就需要弄清楚它与普通函数有什么区别，只有了解了它们存在的差异，才能在使用时更加的合理，即功能与需求契合完好。 那么用function定义的普通函数和箭头函数之间究竟存在哪些差异呢？下面就来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6箭头函数与普通函数的区别">
+<meta property="og:url" content="https://lonelyph.github.io/2019/11/19/ES6%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%88%AB/">
 <meta property="og:site_name" content="一梦七年。的博客">
-<meta property="og:description" content="关于我 网名: 一梦七年。 出生于1994年6月 毕业于湖南工程学院，电子信息工程专业 目前从事web前端开发工作 当前坐标 -- 东莞 爱自由，爱技术，活到老，学到老  博客相关 创建时间: 2020年06月20号 托管: Github Pages 构建工具: node + git + Hexo + nexmoe 用途: 学习笔记、生活笔记  更多关于建设中···">
+<meta property="og:description" content="ES6箭头函数与普通函数的区别随着ES6的在JS开发中的广泛运用，我们已经习惯性的在代码中使用它的一些新特性。而箭头函数作为使用频率较高的一个ES6新特性，在我们的代码中基本上是随处可见了。 要合理的使用箭头函数就需要弄清楚它与普通函数有什么区别，只有了解了它们存在的差异，才能在使用时更加的合理，即功能与需求契合完好。 那么用function定义的普通函数和箭头函数之间究竟存在哪些差异呢？下面就来">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-21T05:24:42.000Z">
-<meta property="article:modified_time" content="2020-06-21T08:17:28.996Z">
+<meta property="article:published_time" content="2019-11-19T12:50:57.000Z">
+<meta property="article:modified_time" content="2020-06-21T14:49:01.592Z">
 <meta property="article:author" content="一梦七年。">
-<meta property="article:tag" content="前端">
-<meta property="article:tag" content=" JS">
-<meta property="article:tag" content=" Node">
-<meta property="article:tag" content=" 笔记">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1592751080902">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1592751080991">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -59,10 +57,7 @@
       }
     }
   </style>
-<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
-<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
-<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body class="mdui-drawer-body-left custom-body-bg">
   
@@ -324,15 +319,15 @@
       <div class="nexmoe-post">
   
       <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
-          <img data-src="/assets/background.png" data-sizes="auto" alt="关于" class="lazyload">
-          <h1>关于</h1>
+          <img data-src="/assets/background.png" data-sizes="auto" alt="ES6箭头函数与普通函数的区别" class="lazyload">
+          <h1>ES6箭头函数与普通函数的区别</h1>
       </div>
   
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年06月21日</a>
-    <a><i class="nexmoefont icon-areachart"></i>102 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2019年11月19日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
 </div>
 
   <div class="nexmoe-post-right">
@@ -340,7 +335,7 @@
       <div class="nexmoe-fixed">
         <div class="nexmoe-valign">
             <div class="nexmoe-toc">
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于我"><span class="toc-number">1.</span> <span class="toc-text">关于我</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客相关"><span class="toc-number">2.</span> <span class="toc-text">博客相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多关于建设中···"><span class="toc-number">3.</span> <span class="toc-text">更多关于建设中···</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6箭头函数与普通函数的区别"><span class="toc-number">1.</span> <span class="toc-text">ES6箭头函数与普通函数的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-箭头函数中的this与它所处作用域有关"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.箭头函数中的this与它所处作用域有关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-普通函数中有arguments，箭头函数中没有，而是用三点运算符替代"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.普通函数中有arguments，箭头函数中没有，而是用三点运算符替代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-箭头函数不能和new一起使用，但普通函数可以"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.箭头函数不能和new一起使用，但普通函数可以</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-箭头函数没有原型prototype，但是普通函数有"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.箭头函数没有原型prototype，但是普通函数有</span></a></li></ol></li></ol></li></ol>
             </div>
         </div>
       </div>
@@ -348,31 +343,117 @@
   </div>
 
   <article>
-    <!-- 播放器配置 -->
+    <h2 id="ES6箭头函数与普通函数的区别"><a href="#ES6箭头函数与普通函数的区别" class="headerlink" title="ES6箭头函数与普通函数的区别"></a>ES6箭头函数与普通函数的区别</h2><p>随着ES6的在JS开发中的广泛运用，我们已经习惯性的在代码中使用它的一些新特性。而箭头函数作为使用频率较高的一个ES6新特性，在我们的代码中基本上是随处可见了。</p>
+<p>要合理的使用箭头函数就需要弄清楚它与普通函数有什么区别，只有了解了它们存在的差异，才能在使用时更加的合理，即功能与需求契合完好。</p>
+<p>那么用function定义的普通函数和箭头函数之间究竟存在哪些差异呢？下面就来讲讲它们的差异，方便自己想不起来的时候查阅，也可以给正在学习这门语言的道友解答一下疑问。若有纰漏，还望各位指正，不胜感激。</p>
+<p>那么下面进入正题。</p>
+<p>在ES6没有出现之前，我们定义函数通常是这样的:</p>
+<pre><code class="js">function fun() {
+    // 具体代码
+} 
 
-    <div id="aplayer-PNfcUUFT" class="aplayer aplayer-tag-marker meting-tag-marker"
-         data-id="4968374" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081" data-order="random"
-    ></div>
+// 或者是这样
+var fun = function() { 
+    // 具体代码
+}</code></pre>
+<p>我们在函数内部的具体代码中经常会使用到this这个值。这个值是什么呢？我之前在学习的时候看了一些网上的资料，有人说this是函数定义的域(也就是定义在哪个对象上)，这个值在定义的时候就确定了，后来在使用bind、apply、call的时候，我发现并不是这样的，因为它们改变了原函数中this的指向。之后我查阅了一些书籍资料后，发现this并不是在定义的时候就确定的，而是在调用的时候确定的，也就是谁调用这个函数，this就指向谁，我觉得这才更符合实际的this定义。比如说:</p>
+<pre><code class="js">function a(){
+    console.log(this);
+}
 
-<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><ul>
-<li>网名: 一梦七年。</li>
-<li>出生于1994年6月</li>
-<li>毕业于湖南工程学院，电子信息工程专业</li>
-<li>目前从事web前端开发工作</li>
-<li>当前坐标 -- 东莞</li>
-<li>爱自由，爱技术，活到老，学到老</li>
-</ul>
-<h2 id="博客相关"><a href="#博客相关" class="headerlink" title="博客相关"></a>博客相关</h2><ul>
-<li>创建时间: 2020年06月20号</li>
-<li>托管: Github Pages</li>
-<li>构建工具: node + git + Hexo + nexmoe</li>
-<li>用途: 学习笔记、生活笔记</li>
-</ul>
-<h2 id="更多关于建设中···"><a href="#更多关于建设中···" class="headerlink" title="更多关于建设中···"></a>更多关于建设中···</h2>
+a(); //Window对象
+
+// 这里的a() 实际上时window对象调用的 具体如下：
+function b(){
+    console.log(this);
+}
+
+window.b(); //Window // 实际上a()等价于window.a()，只不过默认可以省略window.罢了
+
+var obj = {};
+
+a.apply(obj); // {}
+
+// 这里我们运用apply函数，用obj来调用a函数，结果输出的是空对象obj</code></pre>
+<p>由此可见，普通函数中的this应该是在调用时确定的，而不是定义的时候就确定的，即普通函数被谁调用，this就指向谁。</p>
+<p>那么下面开始讲讲普通函数和箭头函数的差异:</p>
+<h4 id="1-箭头函数中的this与它所处作用域有关"><a href="#1-箭头函数中的this与它所处作用域有关" class="headerlink" title="1.箭头函数中的this与它所处作用域有关"></a>1.箭头函数中的this与它所处作用域有关</h4><pre><code class="js">var obj= {
+    fun1:function(){
+        console.log(this);
+    },
+    fun2:function(){
+        return function(){
+            console.log(this);
+        }
+    }
+}
+
+obj.fun1(); // obj
+obj.fun2()(); // window
+// 这里obj.fun2()() 等价于 window.obj.fun2()()</code></pre>
+<p>那么如果把fun2里的普通函数换成箭头函数会怎么样呢？</p>
+<pre><code class="js">var obj= {
+    fun1: function(){
+        console.log(this);
+    },
+    fun2: function(){
+        return () =&gt; {
+            console.log(this);
+        }
+    }
+}
+
+obj.fun1(); // obj
+obj.fun2()(); // obj
+
+// 由此可见，箭头函数中的this继承了它所在的作用域的this</code></pre>
+<h4 id="2-普通函数中有arguments，箭头函数中没有，而是用三点运算符替代"><a href="#2-普通函数中有arguments，箭头函数中没有，而是用三点运算符替代" class="headerlink" title="2.普通函数中有arguments，箭头函数中没有，而是用三点运算符替代"></a>2.普通函数中有arguments，箭头函数中没有，而是用三点运算符替代</h4><pre><code class="js">// 普通函数
+function a(params) {
+    console.log(arguments[0]);
+}
+
+a(1); // 输出： 1
+
+// 箭头函数
+var a = (params) =&gt; {
+    console.log(arguments);
+}
+
+a(1); // 报错：arguments is not defined
+
+// 替代方式：
+var a = (...arg) =&gt; {
+    console.log(arg[0]);
+}
+
+a(1); // 输出：1</code></pre>
+<h4 id="3-箭头函数不能和new一起使用，但普通函数可以"><a href="#3-箭头函数不能和new一起使用，但普通函数可以" class="headerlink" title="3.箭头函数不能和new一起使用，但普通函数可以"></a>3.箭头函数不能和new一起使用，但普通函数可以</h4><pre><code class="js">// 普通函数列子略 ··· 
+
+// 箭头函数
+
+var fun = () =&gt; {};
+
+var fun1 = new fun(); //fun is not a constructor
+
+// 原因是箭头函数不能作为构造器使用</code></pre>
+<h4 id="4-箭头函数没有原型prototype，但是普通函数有"><a href="#4-箭头函数没有原型prototype，但是普通函数有" class="headerlink" title="4.箭头函数没有原型prototype，但是普通函数有"></a>4.箭头函数没有原型prototype，但是普通函数有</h4><pre><code class="js">// 普通函数
+function fun() {};
+console.log(fun.prototype) // {constructor: ƒ...}
+
+// 箭头函数
+var fun = () =&gt; {};
+console.log(fun.prototype) //undefined</code></pre>
+<p>那么以上就是我自己觉得箭头函数和普通函数比较重要的几个差异，当然还有一些其他差异，这里就没有都一一列出来了。</p>
+<p>由此可见，在使用箭头函数的时候还是有很多地方要注意的，一旦滥用箭头函数很可能让自己的代码陷入困境。</p>
+
   </article>
 
   <div class="nexmoe-post-meta nexmoe-rainbow">
     
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/JavaScript/">JavaScript</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/ES6/" rel="tag">ES6</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/JS/" rel="tag">JS</a>
     
 </div>
 
@@ -381,7 +462,7 @@
       
   <div class="nexmoe-post-copyright">
     <strong>本文作者：</strong>一梦七年。<br>
-    <strong>本文链接：</strong><a href="https://lonelyph.github.io/about/" title="https:&#x2F;&#x2F;lonelyph.github.io&#x2F;about&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;lonelyph.github.io&#x2F;about&#x2F;</a><br>
+    <strong>本文链接：</strong><a href="https://lonelyph.github.io/2019/11/19/ES6%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%88%AB/" title="https:&#x2F;&#x2F;lonelyph.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;ES6%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%88%AB&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;lonelyph.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;ES6%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%88%AB&#x2F;</a><br>
     
       <strong>声明：本博客旨在记录学习网络、编程技术以及随笔。</strong>
     
@@ -417,7 +498,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1592751080904"></script>
+<script src="/js/app.js?v=1592751080992"></script>
   
 
 
