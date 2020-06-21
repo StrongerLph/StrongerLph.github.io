@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="一梦七年。的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-21T05:24:42.000Z">
-<meta property="article:modified_time" content="2020-06-21T06:07:31.759Z">
+<meta property="article:modified_time" content="2020-06-21T07:06:00.209Z">
 <meta property="article:author" content="一梦七年。">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content=" JS">
@@ -32,7 +32,7 @@
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1592719778771">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1592723177560">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -44,6 +44,12 @@
     ::-webkit-scrollbar {
       width: 0;
       background: transparent !important;
+    }
+
+    @media screen and (max-width:1024px) {
+      .mdui-appbar.mdui-shadow-0 {
+        background: rgba(255, 0, 0);
+      }
     }
   </style>
 <meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
@@ -68,16 +74,12 @@
   </div>
   <div id="nexmoe-header">
     <style>
-    #drawer {
-        padding-right: 10px;
-    }
-
     .description {
-        width: 100%;
-        display: inline-flex;
-        justify-content: center;
+        width: 230px;
+        margin: 0 auto;
+        text-align: center;
         font-size: 12px;
-        padding: 5px 0;
+        padding: 5px 5px;
         margin-bottom: 30px;
         border-radius: 4px;
         background-color: rgba(255, 255, 255, 0.7);
@@ -94,21 +96,31 @@
     .custom-count {
         display: inline-block;
         padding: 5px 0;
-        border-radius: 4px;
+        border-radius: 15px;
         color: #fff !important;
     }
 
-    .articles {
+    .articles,
+    .articles + .count{
         background-color: #00dbff;
     }
 
-    .tags {
+    .tags,
+    .tags + .count {
         background-color: #33d57a;
     }
 
-    .categories {
+    .categories,
+    .categories + .count {
         background-color: #ff761e;
     }
+
+    .custom-nexmoe-count .count {
+        margin: 5px auto;
+        color: #fff !important;
+        border-radius: 10px;
+    }
+
 </style>
 
 <div class="nexmoe-drawer mdui-drawer" id="drawer">
@@ -124,10 +136,23 @@
     </div>
     
     <div class="nexmoe-count custom-nexmoe-count">
-        <div><span class="custom-count articles">文章</span>1
+        <div>
+            <span class="custom-count articles">
+                文章
+            </span>
+            <span class="count">1</span>
         </div>
-        <div><span class="custom-count tags">标签</span>1</div>
-        <div><span class="custom-count categories">分类</span>1
+        <div>
+            <span class="custom-count tags">
+                标签
+            </span>
+            <span class="count">1</span>
+        </div>
+        <div>
+            <span class="custom-count categories">
+                分类
+            </span>
+            <span class="count">1</span>
         </div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -279,8 +304,9 @@
   </div>
 
   <article>
-    
-    <div id="aplayer-DvwTQpyN" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <!-- 播放器配置 -->
+
+    <div id="aplayer-qVdDRCqx" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="2838289235" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#FF4081" data-order="random"
     ></div>
   </article>
@@ -330,7 +356,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1592719778774"></script>
+<script src="/js/app.js?v=1592723177561"></script>
   
 
 
