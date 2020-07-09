@@ -15,15 +15,15 @@
     <meta name="baidu-site-verification" content="R9GProVFnk" />
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="JS闭包的前世今生一、闭包是什么闭包是JavaScript的一大特点，同时也是一大难点，简单来说就是，如果闭包用的好对于平时开发来说很有帮助，但是用得不好就可能会使你陷入泥沼。说到JS闭包，首先就得先讲讲JS的变量作用域、作用域链。">
+  <meta name="description" content="JS 闭包的前世今生一、闭包是什么闭包是 JavaScript 的一大特点，同时也是一大难点，简单来说就是，如果闭包用的好对于平时开发来说很有帮助，但是用得不好就可能会使你陷入泥沼。说到 JS 闭包，首先就得先讲讲 JS 的变量作用域、作用域链。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS闭包的前世今生">
 <meta property="og:url" content="https://lonelyph.github.io/2019/10/13/JS%E9%97%AD%E5%8C%85%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">
 <meta property="og:site_name" content="一梦七年。的博客">
-<meta property="og:description" content="JS闭包的前世今生一、闭包是什么闭包是JavaScript的一大特点，同时也是一大难点，简单来说就是，如果闭包用的好对于平时开发来说很有帮助，但是用得不好就可能会使你陷入泥沼。说到JS闭包，首先就得先讲讲JS的变量作用域、作用域链。">
+<meta property="og:description" content="JS 闭包的前世今生一、闭包是什么闭包是 JavaScript 的一大特点，同时也是一大难点，简单来说就是，如果闭包用的好对于平时开发来说很有帮助，但是用得不好就可能会使你陷入泥沼。说到 JS 闭包，首先就得先讲讲 JS 的变量作用域、作用域链。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-10-13T08:29:47.000Z">
-<meta property="article:modified_time" content="2020-06-24T17:58:55.444Z">
+<meta property="article:modified_time" content="2020-07-09T15:15:26.074Z">
 <meta property="article:author" content="一梦七年。">
 <meta property="article:tag" content="JS">
 <meta property="article:tag" content="前端">
@@ -33,7 +33,7 @@
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1593022746653">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1594312241825">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -142,19 +142,19 @@
             <span class="custom-count articles">
                 文章
             </span>
-            <span class="count">10</span>
+            <span class="count">11</span>
         </div>
         <div>
             <span class="custom-count tags">
                 标签
             </span>
-            <span class="count">18</span>
+            <span class="count">19</span>
         </div>
         <div>
             <span class="custom-count categories">
                 分类
             </span>
-            <span class="count">5</span>
+            <span class="count">6</span>
         </div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -232,6 +232,13 @@
         
 
         <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
           <a class="category-list-link" href="/categories/Vue相关/">Vue相关</a>
           <span class="category-list-count">1</span>
         </li>
@@ -269,7 +276,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">标签云</h3>
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Ant-Design-of-Vue/" style="font-size: 10px;">Ant Design of Vue</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vant/" style="font-size: 10px;">Vant</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/element-ui/" style="font-size: 10px;">element-ui</a> <a href="/tags/headless-CMS/" style="font-size: 10px;">headless-CMS</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 10px;">组件库</a> <a href="/tags/%E8%85%BE%E8%AE%AFAI/" style="font-size: 10px;">腾讯AI</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/" style="font-size: 10px;">身份证识别</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a>
+      <a href="/tags/Ant-Design-of-Vue/" style="font-size: 10px;">Ant Design of Vue</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vant/" style="font-size: 10px;">Vant</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/element-ui/" style="font-size: 10px;">element-ui</a> <a href="/tags/headless-CMS/" style="font-size: 10px;">headless-CMS</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 10px;">组件库</a> <a href="/tags/%E8%85%BE%E8%AE%AFAI/" style="font-size: 10px;">腾讯AI</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/" style="font-size: 10px;">身份证识别</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a>
     </div>
     
   </div>
@@ -289,11 +296,15 @@
     <ul class="article-list">
       
       <li>
+        <a href="/2020/07/09/Nginx%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">Nginx简单配置本地代理转发</a>
+      </li>
+      
+      <li>
         <a href="/2020/06/21/new_blog/">换新博客了！服务器耗不起，github托管吧！</a>
       </li>
       
       <li>
-        <a href="/2020/03/11/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20--%20(1)%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">JS设计模式 -- (1)工厂模式(草稿)</a>
+        <a href="/2020/03/11/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20--%20(1)%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">JS设计模式</a>
       </li>
       
       <li>
@@ -302,10 +313,6 @@
       
       <li>
         <a href="/2020/02/04/%E5%9F%BA%E4%BA%8Ewebpack%E7%9A%84require.context()API%EF%BC%8C%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80Vue%E7%BB%84%E4%BB%B6/">基于webpack的require.context()API，批量自动注册全局Vue组件</a>
-      </li>
-      
-      <li>
-        <a href="/2020/01/14/Vue%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%BB%84%E4%BB%B6%E5%BA%93%E5%AF%B9%E6%AF%94/">Vue的三个常见组件库对比</a>
       </li>
       
     </ul>
@@ -333,7 +340,7 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2019年10月13日</a>
-    <a><i class="nexmoefont icon-areachart"></i>975 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>980 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
 </div>
 
@@ -342,7 +349,7 @@
       <div class="nexmoe-fixed">
         <div class="nexmoe-valign">
             <div class="nexmoe-toc">
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS闭包的前世今生"><span class="toc-number">1.</span> <span class="toc-text">JS闭包的前世今生</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、闭包是什么"><span class="toc-number">1.1.</span> <span class="toc-text">一、闭包是什么</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS-闭包的前世今生"><span class="toc-number">1.</span> <span class="toc-text">JS 闭包的前世今生</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、闭包是什么"><span class="toc-number">1.1.</span> <span class="toc-text">一、闭包是什么</span></a></li></ol></li></ol>
             </div>
         </div>
       </div>
@@ -350,32 +357,32 @@
   </div>
 
   <article>
-    <h2 id="JS闭包的前世今生"><a href="#JS闭包的前世今生" class="headerlink" title="JS闭包的前世今生"></a>JS闭包的前世今生</h2><h3 id="一、闭包是什么"><a href="#一、闭包是什么" class="headerlink" title="一、闭包是什么"></a>一、闭包是什么</h3><p>闭包是JavaScript的一大特点，同时也是一大难点，简单来说就是，如果闭包用的好对于平时开发来说很有帮助，但是用得不好就可能会使你陷入泥沼。说到JS闭包，首先就得先讲讲JS的变量作用域、作用域链。</p>
+    <h2 id="JS-闭包的前世今生"><a href="#JS-闭包的前世今生" class="headerlink" title="JS 闭包的前世今生"></a>JS 闭包的前世今生</h2><h3 id="一、闭包是什么"><a href="#一、闭包是什么" class="headerlink" title="一、闭包是什么"></a>一、闭包是什么</h3><p>闭包是 JavaScript 的一大特点，同时也是一大难点，简单来说就是，如果闭包用的好对于平时开发来说很有帮助，但是用得不好就可能会使你陷入泥沼。说到 JS 闭包，首先就得先讲讲 JS 的变量作用域、作用域链。</p>
 <a id="more"></a>
 
-<p>在JS中变量作用域分两种，一个是全局作用域一个是局部作用域:</p>
-<pre><code class="js">var a = 1 // 全局作用域中的变量
+<p>在 JS 中变量作用域分两种，一个是全局作用域一个是局部作用域:</p>
+<pre><code class="js">var a = 1; // 全局作用域中的变量
 
 function fun() {
-    var b = 2 // 局部作用域中的变量
-    console.log(a, b)
+  var b = 2; // 局部作用域中的变量
+  console.log(a, b);
 }
 
-fun()</code></pre>
-<p>上面代码中a是全局变量，b是局部变量，由于在JS中函数内部可以直接读取到全局变量，以及作用域链的存在，在执行console时，会先在函数内部查找变量a，没有则向上一层作用域查找，直到找到或者找不到而报错。</p>
-<p>以上的变量访问需求是最简单的情况，但是在开发中我们也常常会遇到需要在函数外部访问函数内部的变量的情况。我们都知道，正常情况下我们是无法在外面获取到函数内部的变量的，所以我们通常会在函数内部再定义一个函数，然后将这个函数return出来，return出来的这个函数自然就能获取到我们需要的变量了:</p>
+fun();</code></pre>
+<p>上面代码中 a 是全局变量，b 是局部变量，由于在 JS 中函数内部可以直接读取到全局变量，以及作用域链的存在，在执行 console 时，会先在函数内部查找变量 a，没有则向上一层作用域查找，直到找到或者找不到而报错。</p>
+<p>以上的变量访问需求是最简单的情况，但是在开发中我们也常常会遇到需要在函数外部访问函数内部的变量的情况。我们都知道，正常情况下我们是无法在外面获取到函数内部的变量的，所以我们通常会在函数内部再定义一个函数，然后将这个函数 return 出来，return 出来的这个函数自然就能获取到我们需要的变量了:</p>
 <pre><code class="js">function fun1() {
-    const a = 1
-    return function fun2() {
-        console.log(a)
-    }
+  const a = 1;
+  return function fun2() {
+    console.log(a);
+  };
 }
 
-const result = fun1()
+const result = fun1();
 
-result() // 打印 1</code></pre>
-<p>那么上面的代码就中就形成了一个闭包，即函数fun2。对于闭包的解释网上很多资料，但是看了好几个发现看完了也还是很模糊的概念，所以我就暂且简单的将他理解为：定义在某个函数内部，并且作为该函数返回值的函数就是闭包。实际上闭包只是连接函数内部和函数外部的一种方法。</p>
-<p>在JS中很多地方都能用到闭包，闭包主要是用来在函数外部读取函数内部的变量，以及让这些变量始终保存在内存里，而不会被回收掉。</p>
+result(); // 打印 1</code></pre>
+<p>那么上面的代码就中就形成了一个闭包，即函数 fun2。对于闭包的解释网上很多资料，但是看了好几个发现看完了也还是很模糊的概念，所以我就暂且简单的将他理解为：定义在某个函数内部，并且作为该函数返回值的函数就是闭包。实际上闭包只是连接函数内部和函数外部的一种方法。</p>
+<p>在 JS 中很多地方都能用到闭包，闭包主要是用来在函数外部读取函数内部的变量，以及让这些变量始终保存在内存里，而不会被回收掉。</p>
 <pre><code class="js">function f1(){
 
     var n=999;
@@ -399,9 +406,9 @@ result(); // 1000
 Add(); // 1000
 
 result(); // 1001</code></pre>
-<p>通过上面的代码可以说明闭包读取的变量不会被回收，所以f1中的变量n一直保存在内存中。那为什么会有这种情况呢？首先按照JS的特点，f2是f1的子函数，f2可以读取f1中的变量，而f2被作为返回值赋值给了全局变量result，因此result始终在内存中，那么f2也始终在内存中，而f2是在f1中定义的，因此f1也始终在内存中，这就导致了f1中的变量也始终在内存中。</p>
-<p>有人也许会疑惑为什么Add函数能在外部调用，这里的话是因为Add它是个变量，而且是在局部定义的全局变量，而这个变量的值是个匿名函数，所以可以在函数外部调用Add。</p>
-<p>正是由于这种特性，闭包的内存消耗是很大的，所以一旦闭包使用不当，则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的变量全都删除掉。</p>
+<p>通过上面的代码可以说明闭包读取的变量不会被回收，所以 f1 中的变量 n 一直保存在内存中。那为什么会有这种情况呢？首先按照 JS 的特点，f2 是 f1 的子函数，f2 可以读取 f1 中的变量，而 f2 被作为返回值赋值给了全局变量 result，因此 result 始终在内存中，那么 f2 也始终在内存中，而 f2 是在 f1 中定义的，因此 f1 也始终在内存中，这就导致了 f1 中的变量也始终在内存中。</p>
+<p>有人也许会疑惑为什么 Add 函数能在外部调用，这里的话是因为 Add 它是个变量，而且是在局部定义的全局变量，而这个变量的值是个匿名函数，所以可以在函数外部调用 Add。</p>
+<p>正是由于这种特性，闭包的内存消耗是很大的，所以一旦闭包使用不当，则会造成网页的性能问题，在 IE 中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的变量全都删除掉。</p>
 <p>还有一个需要注意的就是闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象使用，把闭包当作它的公用方法，把内部变量当作它的私有属性，这时一定要小心，不要随便改变父函数内部变量的值。</p>
 
   </article>
@@ -448,7 +455,7 @@ result(); // 1001</code></pre>
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1593022746657"></script>
+<script src="/js/app.js?v=1594312241826"></script>
   
 
 

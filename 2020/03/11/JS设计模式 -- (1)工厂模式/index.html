@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>JS设计模式 -- (1)工厂模式(草稿) - 一梦七年。的博客</title>
+  <title>JS设计模式 - 一梦七年。的博客</title>
   <meta charset="UTF-8">
   <meta name="description" content="一派青春撞了南墙，一生热爱回头太难。">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -15,15 +15,15 @@
     <meta name="baidu-site-verification" content="R9GProVFnk" />
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="JS设计模式 – (1)工厂模式设计模式是面向对象语言中一套在特定场景下的较为简洁且优雅的解决方案。最初的设计模式可以说是为静态类型语言而生的，或者说是完全从面向对象编程的角度出发的。但是设计模式实际上只是一种思想，即如何在某种场景下更简洁优雅的解决对应的问题，并将这种设计思想提炼出来形成一种普适的模式，因此设计模式本身是与语言无关的。每种语言都有一些比较实用的设计模式，使用这些设计模式可以提高代">
+  <meta name="description" content="JS设计模式设计模式是面向对象语言中一套在特定场景下的较为简洁且优雅的解决方案。最初的设计模式可以说是为静态类型语言而生的，或者说是完全从面向对象编程的角度出发的。但是设计模式实际上只是一种思想，即如何在某种场景下更简洁优雅的解决对应的问题，并将这种设计思想提炼出来形成一种普适的模式，因此设计模式本身是与语言无关的。每种语言都有一些比较实用的设计模式，使用这些设计模式可以提高代码的整洁性、可维护性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS设计模式 -- (1)工厂模式(草稿)">
+<meta property="og:title" content="JS设计模式">
 <meta property="og:url" content="https://lonelyph.github.io/2020/03/11/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20--%20(1)%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
 <meta property="og:site_name" content="一梦七年。的博客">
-<meta property="og:description" content="JS设计模式 – (1)工厂模式设计模式是面向对象语言中一套在特定场景下的较为简洁且优雅的解决方案。最初的设计模式可以说是为静态类型语言而生的，或者说是完全从面向对象编程的角度出发的。但是设计模式实际上只是一种思想，即如何在某种场景下更简洁优雅的解决对应的问题，并将这种设计思想提炼出来形成一种普适的模式，因此设计模式本身是与语言无关的。每种语言都有一些比较实用的设计模式，使用这些设计模式可以提高代">
+<meta property="og:description" content="JS设计模式设计模式是面向对象语言中一套在特定场景下的较为简洁且优雅的解决方案。最初的设计模式可以说是为静态类型语言而生的，或者说是完全从面向对象编程的角度出发的。但是设计模式实际上只是一种思想，即如何在某种场景下更简洁优雅的解决对应的问题，并将这种设计思想提炼出来形成一种普适的模式，因此设计模式本身是与语言无关的。每种语言都有一些比较实用的设计模式，使用这些设计模式可以提高代码的整洁性、可维护性">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-11T09:18:15.000Z">
-<meta property="article:modified_time" content="2020-06-24T16:41:23.893Z">
+<meta property="article:modified_time" content="2020-06-28T16:11:29.231Z">
 <meta property="article:author" content="一梦七年。">
 <meta property="article:tag" content="JS">
 <meta property="article:tag" content="设计模式">
@@ -32,7 +32,7 @@
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1593022746632">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1594312241816">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -141,19 +141,19 @@
             <span class="custom-count articles">
                 文章
             </span>
-            <span class="count">10</span>
+            <span class="count">11</span>
         </div>
         <div>
             <span class="custom-count tags">
                 标签
             </span>
-            <span class="count">18</span>
+            <span class="count">19</span>
         </div>
         <div>
             <span class="custom-count categories">
                 分类
             </span>
-            <span class="count">5</span>
+            <span class="count">6</span>
         </div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -231,6 +231,13 @@
         
 
         <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
           <a class="category-list-link" href="/categories/Vue相关/">Vue相关</a>
           <span class="category-list-count">1</span>
         </li>
@@ -268,7 +275,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">标签云</h3>
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Ant-Design-of-Vue/" style="font-size: 10px;">Ant Design of Vue</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vant/" style="font-size: 10px;">Vant</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/element-ui/" style="font-size: 10px;">element-ui</a> <a href="/tags/headless-CMS/" style="font-size: 10px;">headless-CMS</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 10px;">组件库</a> <a href="/tags/%E8%85%BE%E8%AE%AFAI/" style="font-size: 10px;">腾讯AI</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/" style="font-size: 10px;">身份证识别</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a>
+      <a href="/tags/Ant-Design-of-Vue/" style="font-size: 10px;">Ant Design of Vue</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vant/" style="font-size: 10px;">Vant</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/element-ui/" style="font-size: 10px;">element-ui</a> <a href="/tags/headless-CMS/" style="font-size: 10px;">headless-CMS</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 10px;">组件库</a> <a href="/tags/%E8%85%BE%E8%AE%AFAI/" style="font-size: 10px;">腾讯AI</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/" style="font-size: 10px;">身份证识别</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a>
     </div>
     
   </div>
@@ -288,11 +295,15 @@
     <ul class="article-list">
       
       <li>
+        <a href="/2020/07/09/Nginx%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">Nginx简单配置本地代理转发</a>
+      </li>
+      
+      <li>
         <a href="/2020/06/21/new_blog/">换新博客了！服务器耗不起，github托管吧！</a>
       </li>
       
       <li>
-        <a href="/2020/03/11/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20--%20(1)%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">JS设计模式 -- (1)工厂模式(草稿)</a>
+        <a href="/2020/03/11/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20--%20(1)%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">JS设计模式</a>
       </li>
       
       <li>
@@ -301,10 +312,6 @@
       
       <li>
         <a href="/2020/02/04/%E5%9F%BA%E4%BA%8Ewebpack%E7%9A%84require.context()API%EF%BC%8C%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80Vue%E7%BB%84%E4%BB%B6/">基于webpack的require.context()API，批量自动注册全局Vue组件</a>
-      </li>
-      
-      <li>
-        <a href="/2020/01/14/Vue%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%BB%84%E4%BB%B6%E5%BA%93%E5%AF%B9%E6%AF%94/">Vue的三个常见组件库对比</a>
       </li>
       
     </ul>
@@ -325,15 +332,15 @@
       <div class="nexmoe-post">
   
       <div class="nexmoe-post-cover" style="padding-bottom: 43.333333333333336%;"> 
-          <img data-src="https://lonelyph.github.io/assets/images/初音壁纸.jpg" data-sizes="auto" alt="JS设计模式 -- (1)工厂模式(草稿)" class="lazyload">
-          <h1>JS设计模式 -- (1)工厂模式(草稿)</h1>
+          <img data-src="https://lonelyph.github.io/assets/images/初音壁纸.jpg" data-sizes="auto" alt="JS设计模式" class="lazyload">
+          <h1>JS设计模式</h1>
       </div>
   
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2020年03月11日</a>
-    <a><i class="nexmoefont icon-areachart"></i>452 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>912 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
 </div>
 
   <div class="nexmoe-post-right">
@@ -341,7 +348,7 @@
       <div class="nexmoe-fixed">
         <div class="nexmoe-valign">
             <div class="nexmoe-toc">
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS设计模式-–-1-工厂模式"><span class="toc-number">1.</span> <span class="toc-text">JS设计模式 – (1)工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JS中的工厂模式"><span class="toc-number">1.0.1.</span> <span class="toc-text">JS中的工厂模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#简单工厂模式"><span class="toc-number">1.0.2.</span> <span class="toc-text">简单工厂模式:</span></a></li></ol></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS设计模式"><span class="toc-number">1.</span> <span class="toc-text">JS设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、工厂模式"><span class="toc-number">1.1.</span> <span class="toc-text">一、工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#简单工厂模式"><span class="toc-number">1.1.1.</span> <span class="toc-text">简单工厂模式:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工厂方法模式"><span class="toc-number">1.1.2.</span> <span class="toc-text">工厂方法模式</span></a></li></ol></li></ol></li></ol>
             </div>
         </div>
       </div>
@@ -349,12 +356,47 @@
   </div>
 
   <article>
-    <h2 id="JS设计模式-–-1-工厂模式"><a href="#JS设计模式-–-1-工厂模式" class="headerlink" title="JS设计模式 – (1)工厂模式"></a>JS设计模式 – (1)工厂模式</h2><p>设计模式是面向对象语言中一套在特定场景下的较为简洁且优雅的解决方案。最初的设计模式可以说是为静态类型语言而生的，或者说是完全从面向对象编程的角度出发的。但是设计模式实际上只是一种思想，即如何在某种场景下更简洁优雅的解决对应的问题，并将这种设计思想提炼出来形成一种普适的模式，因此设计模式本身是与语言无关的。每种语言都有一些比较实用的设计模式，使用这些设计模式可以提高代码的整洁性、可维护性以及性能等，JS中也不乏有一些必须要掌握的设计模式。</p>
+    <h2 id="JS设计模式"><a href="#JS设计模式" class="headerlink" title="JS设计模式"></a>JS设计模式</h2><p>设计模式是面向对象语言中一套在特定场景下的较为简洁且优雅的解决方案。最初的设计模式可以说是为静态类型语言而生的，或者说是完全从面向对象编程的角度出发的。但是设计模式实际上只是一种思想，即如何在某种场景下更简洁优雅的解决对应的问题，并将这种设计思想提炼出来形成一种普适的模式，因此设计模式本身是与语言无关的。每种语言都有一些比较实用的设计模式，使用这些设计模式可以提高代码的整洁性、可维护性以及性能等，JS中也不乏有一些必须要掌握的设计模式。</p>
 <a id="more"></a>
 
-<h4 id="JS中的工厂模式"><a href="#JS中的工厂模式" class="headerlink" title="JS中的工厂模式"></a>JS中的工厂模式</h4><p>什么是工厂模式呢？打个比方，在面向对象语言中，我们的对象就好比手机，工厂函数就相当于手机制造厂，我们只需要将对应的零部件提供给工厂，工厂就能产出我们要的手机，至于如何生产的，我们就不需要关心了，我们的目的就是得到手机(对象)。所以工厂模式就是类似的一种生产的模式，只不过在JS中工厂模式生产的是对象。</p>
+<h3 id="一、工厂模式"><a href="#一、工厂模式" class="headerlink" title="一、工厂模式"></a>一、工厂模式</h3><p>什么是工厂模式呢？打个比方，在面向对象语言中，我们的对象就好比手机，工厂函数就相当于手机制造厂，我们只需要将对应的零部件提供给工厂，工厂就能产出我们要的手机，至于如何生产的，我们就不需要关心了，我们的目的就是得到手机(对象)。所以工厂模式就是类似的一种生产的模式，只不过在JS中工厂模式生产的是对象。</p>
 <p>工厂模式根据抽象程度的不同又可以分为三种工厂模式：简单工厂模式、工厂方法模式和抽象工厂模式。</p>
-<h4 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式:"></a>简单工厂模式:</h4><p>简单工厂模式也称为静态工厂模式，由一个工厂对象决定创建某个类的实例，主要用来创建同一类对象。</p>
+<h4 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式:"></a>简单工厂模式:</h4><p>简单工厂模式也称为静态工厂模式，由一个工厂对象决定创建某个类的实例，主要用来创建同一类对象。假如你开了一家汽车制造公司，你的公司可以生产3种品牌的汽车，A、B、C。我们用构造器把汽车抽象为一个汽车类:</p>
+<pre><code class="js">// 构造一个汽车类，包含了型号属性、价格属性
+function Car(options) {
+    this.model = options.model;
+    this.price = options.price;
+}</code></pre>
+<p>那么我们要如何才能生产不同品牌的汽车呢？这里就可以用简单工厂模式来实现。把生产哪种品牌的汽车这个逻辑抽离出来:</p>
+<pre><code class="js">function makeCar(brand) {
+    function Car(options) {
+        this.model = options.model;
+        this.price = options.price;
+    }
+
+    switch(brand) {
+        case &quot;A&quot;: 
+            return new Car({model: &quot;A-1&quot;, price: 350000});
+        case &quot;B&quot;:
+            return new Car({model: &quot;B-1&quot;, price: 250000});
+        case &quot;C&quot;:
+            return new Car({model: &quot;C-1&quot;, price: 150000});
+        default: 
+            throw new Error(&quot;目前仅可生产汽车品牌A、B、C的汽车&quot;)
+    }
+}
+
+// 生产A品牌的汽车
+const CarA = makeCar(&quot;A&quot;); // {model: &quot;A-1&quot;, price: 350000}
+
+// 生产B品牌的汽车
+const CarB = makeCar(&quot;B&quot;); // {model: &quot;B-1&quot;, price: 250000}
+
+// 生产C品牌的汽车
+const CarC = makeCar(&quot;C&quot;); // {model: &quot;C-1&quot;, price: 150000}
+</code></pre>
+<p>简单工厂模式让我没无需关注于创建对象的过程，我们只需要指定自己要什么，其他的事，工厂函数会帮我们处理。但是这只限对象数量少的情况，如果对象数量太多，创建逻辑比较复杂的时候，这个函数就会变得非常大，而且每次新增或者减少我们都要去修改内部的实现，维护起来异常艰难，也不符合开放封闭原则。因此，简单工厂模式比较有局限性。</p>
+<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><p>工厂方法模式跟简单工厂模式不同的是，工厂方法模式将创建对象的行为推迟到子类中去完成，父类只规定</p>
 
   </article>
 
@@ -400,7 +442,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1593022746634"></script>
+<script src="/js/app.js?v=1594312241817"></script>
   
 
 
