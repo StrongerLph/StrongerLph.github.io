@@ -32,7 +32,7 @@
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1599671377667">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1599671502773">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -295,6 +295,10 @@
     <ul class="article-list">
       
       <li>
+        <a href="/2020/09/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E5%AF%B9%E8%B1%A1/">简单的发布订阅对象 待完善···</a>
+      </li>
+      
+      <li>
         <a href="/2020/07/09/Nginx%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">Nginx简单配置本地代理转发</a>
       </li>
       
@@ -308,10 +312,6 @@
       
       <li>
         <a href="/2020/02/20/%E5%BC%82%E6%AD%A5%E6%89%A7%E8%A1%8C%E7%9A%84location-href/">异步执行的location.href</a>
-      </li>
-      
-      <li>
-        <a href="/2020/02/04/%E5%9F%BA%E4%BA%8Ewebpack%E7%9A%84require.context()API%EF%BC%8C%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80Vue%E7%BB%84%E4%BB%B6/">基于webpack的require.context()API，批量自动注册全局Vue组件</a>
       </li>
       
     </ul>
@@ -330,6 +330,29 @@
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
       <section class="nexmoe-posts">
+    
+    <div class="nexmoe-post">
+        <a href="/2020/09/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E5%AF%B9%E8%B1%A1/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 43.333333333333336%;"> 
+                    <img data-src="https://lonelyph.github.io/assets/images/miaosu.jpg" data-sizes="auto" alt="简单的发布订阅对象 待完善···" class="lazyload">
+                    <h1>简单的发布订阅对象 待完善···</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月10日</a>
+            <a><i class="nexmoefont icon-areachart"></i>140 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+        </div>
+
+        <article>
+            
+                <h2 id="简单的发布订阅对象"><a href="#简单的发布订阅对象" class="headerlink" title="简单的发布订阅对象"></a>简单的发布订阅对象</h2><p>最近在项目中遇到一个需求，要在点击按钮保存的时候同时去触发多个组件中的数据更新，原本项目中是用 vuex 实现了一个发布订阅的功能的，但是由于是用到 vuex 管理状态的功能，对于更新状态可能还方便，要触发调用某些方法函数可能用起来就有点别扭了。所以参考网上的一些资料，简单的做了一个发布订阅模块。</p>
+            
+        </article>
+    </div>
     
     <div class="nexmoe-post">
         <a href="/2020/07/09/Nginx%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">
@@ -424,30 +447,6 @@
         </article>
     </div>
     
-    <div class="nexmoe-post">
-        <a href="/2020/02/04/%E5%9F%BA%E4%BA%8Ewebpack%E7%9A%84require.context()API%EF%BC%8C%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80Vue%E7%BB%84%E4%BB%B6/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 43.333333333333336%;"> 
-                    <img data-src="https://lonelyph.github.io/assets/images/longmao.jpg" data-sizes="auto" alt="基于webpack的require.context()API，批量自动注册全局Vue组件" class="lazyload">
-                    <h1>基于webpack的require.context()API，批量自动注册全局Vue组件</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年02月04日</a>
-            <a><i class="nexmoefont icon-areachart"></i>605 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
-        </div>
-
-        <article>
-            
-                <h2 id="基于webpack的require-context-API，批量自动注册全局Vue组件"><a href="#基于webpack的require-context-API，批量自动注册全局Vue组件" class="headerlink" title="基于webpack的require.context()API，批量自动注册全局Vue组件"></a>基于webpack的require.context()API，批量自动注册全局Vue组件</h2><p>在vue的项目中，我们很多时候都会用到组件，有时候一个组件只用一次，有时候一个组件在很多地方都要用到。</p>
-<p>那么为了代码的简洁，以及避免我们开发时做更多的重复性的操作，对于那些会在很多地方都用到的组件，我们有必要将其注册为全局组件，以便一次注册，全局调用，免得不停的import。</p>
-            
-        </article>
-    </div>
-    
 </section>
 
     <nav class="nexmoe-page-nav">
@@ -463,7 +462,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1599671377668"></script>
+<script src="/js/app.js?v=1599671502775"></script>
   
 
 

@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>Nginx简单配置本地代理转发 - 一梦七年。的博客</title>
+  <title>文章归档：2020/9 - 一梦七年。的博客</title>
   <meta charset="UTF-8">
   <meta name="description" content="一派青春撞了南墙，一生热爱回头太难。">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -15,23 +15,24 @@
     <meta name="baidu-site-verification" content="R9GProVFnk" />
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="Nginx 简单配置本地代理转发作为 web 前端开发人员，平时少不了遇到本地联调接口时的跨域问题，也免不了不同环境接口调试等问题，总之就是免不了会频繁的切换不同环境的接口。如果每一次切换接口都去文件里改那岂不是太麻烦，所以在前段了解了一下 nginx，为了平时开发调试方便，就在自己电脑上配置了不同环境的请求转发以及本地代理，在这里做个笔记，免得忘记。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Nginx简单配置本地代理转发">
-<meta property="og:url" content="https://lonelyph.github.io/2020/07/09/Nginx%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">
+  <meta name="description" content="一派青春撞了南墙，一生热爱回头太难。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="一梦七年。的博客">
+<meta property="og:url" content="https://lonelyph.github.io/archives/2020/09/">
 <meta property="og:site_name" content="一梦七年。的博客">
-<meta property="og:description" content="Nginx 简单配置本地代理转发作为 web 前端开发人员，平时少不了遇到本地联调接口时的跨域问题，也免不了不同环境接口调试等问题，总之就是免不了会频繁的切换不同环境的接口。如果每一次切换接口都去文件里改那岂不是太麻烦，所以在前段了解了一下 nginx，为了平时开发调试方便，就在自己电脑上配置了不同环境的请求转发以及本地代理，在这里做个笔记，免得忘记。">
+<meta property="og:description" content="一派青春撞了南墙，一生热爱回头太难。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-09T15:25:46.000Z">
-<meta property="article:modified_time" content="2020-07-09T16:30:25.834Z">
 <meta property="article:author" content="一梦七年。">
-<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content=" JS">
+<meta property="article:tag" content=" Node">
+<meta property="article:tag" content=" 笔记">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1599671502720">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1599671502815">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -328,143 +329,80 @@
   </div>
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
-      <div class="nexmoe-post">
-  
-      <div class="nexmoe-post-cover" style="padding-bottom: 54.166666666666664%;"> 
-          <img data-src="https://lonelyph.github.io/assets/images/pz.jpg" data-sizes="auto" alt="Nginx简单配置本地代理转发" class="lazyload">
-          <h1>Nginx简单配置本地代理转发</h1>
-      </div>
-  
-  
-  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年07月09日</a>
-    <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
-</div>
-
-  <div class="nexmoe-post-right">
-    
-      <div class="nexmoe-fixed">
-        <div class="nexmoe-valign">
-            <div class="nexmoe-toc">
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-简单配置本地代理转发"><span class="toc-number">1.</span> <span class="toc-text">Nginx 简单配置本地代理转发</span></a></li></ol>
-            </div>
-        </div>
-      </div>
-    
-  </div>
-
-  <article>
-    <h2 id="Nginx-简单配置本地代理转发"><a href="#Nginx-简单配置本地代理转发" class="headerlink" title="Nginx 简单配置本地代理转发"></a>Nginx 简单配置本地代理转发</h2><p>作为 web 前端开发人员，平时少不了遇到本地联调接口时的跨域问题，也免不了不同环境接口调试等问题，总之就是免不了会频繁的切换不同环境的接口。如果每一次切换接口都去文件里改那岂不是太麻烦，所以在前段了解了一下 nginx，为了平时开发调试方便，就在自己电脑上配置了不同环境的请求转发以及本地代理，在这里做个笔记，免得忘记。</p>
-<a id="more"></a>
-
-<p>打开 nginx 根目录，新建一个文件夹命名为<code>customConfig</code>，然后再在这个文件夹下新建一个<code>custom.conf</code>文件，接着在文件中写入一些配置，如下:</p>
-<pre><code>    server {
-        # 监听本地端口
-        listen 9527;
-
-        # 开发环境接口请求地址
-        if ($host = &quot;dev.localhost&quot;) {
-            set $service http://dev.ex.com:3000;
-        }
-        # 测试环境接口请求地址
-        if ($host = &quot;test.localhost&quot;) {
-            set $service http://test.ex.com:3000;
-        }
-        # 生产环境接口请求地址
-        if ($host = &quot;product.localhost&quot;) {
-            set $service http://product.ex.com:3000;
-        }
-
-        location ~/*api {
-            # Nginx 0.6.18版本以后,proxy_pass设置为变量时需要使用resolver指定DNS服务器地址
-            resolver xx.xx.xx.xx; # 这里配置你的DNS服务器地址
-            proxy_pass $service;
-        }
-
-        location / {
-            # 代理本地端口
-            proxy_pass http://127.0.0.1:8080;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }</code></pre><p>然后在<code>nginx.conf</code>文件最后面引入一下上面这个文件夹的配置文件，即在<code>nginx.conf</code>文件最后加上<code>include customConfig/*.conf</code>，然后重启一下 nginx，这时如果你的前端项目运行在 8080 端口，那么你如果想让本地运行的项目请求指定的服务地址，只需要通过配置的对应域名去访问项目即可。例如访问 dev.localhost:9527，就可以打开你 8080 端口运行的前端项目并且将你所有 <code>url</code> 包含<code>/api</code>的请求全都转发到<a href="http://dev.ex.com:3000，其他的以此类推。">http://dev.ex.com:3000，其他的以此类推。</a></p>
-<p>但是需要注意的是 location 匹配<code>/</code>时，必须放到最后面去，避免它匹配别的代理配置。同时接口 url 也要做同一的调整，特别是匹配 url 这一块，不同的匹配方式效果也不同，具体参考官方文档或网上的资源，这里就不细说了，主要自己也还不是很熟，往后加深了解后再来补充。</p>
-<p>接着是配置跨域，同样创建一个<code>cors</code>文件夹，并新建<code>cors.conf</code>文件，然后在文件中加入配置:</p>
-<pre><code>   add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;
-
-   # OPTIONS方法
-   if ($request_method = &#39;OPTIONS&#39;) {
-      add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;
-      #
-      # Custom headers and headers various browsers *should* be OK with but aren&#39;t
-      #
-      add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;
-      #
-      # Tell client that this pre-flight info is valid for 20 days
-      #
-      add_header &#39;Access-Control-Max-Age&#39; 1728000;
-      add_header &#39;Content-Type&#39; &#39;text/plain charset=UTF-8&#39;;
-      add_header &#39;Content-Length&#39; 0;
-      return 204;
-   }
-
-   # POST方法
-   if ($request_method = &#39;POST&#39;) {
-      add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;
-   }
-
-   # GET方法
-   if ($request_method = &#39;GET&#39;) {
-      add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;
-   }</code></pre><p>以上是一些简单的配置，有更多需求的可以自定义配置。</p>
-<p>配置好之后，在需要使用跨域配置的地方引入文件，例如:</p>
-<pre><code>location ~/*api {
-    # Nginx 0.6.18版本以后,proxy_pass设置为变量时需要使用resolver指定DNS服务器地址
-    resolver xx.xx.xx.xx; # 这里配置你的DNS服务器地址
-    include cors/*.conf
-    proxy_pass $service;
-}</code></pre><p>这样一来本地调试也不用担心跨域问题了，非常省事。而且配置文件可以有很多，你可以为每个项目写一份配置文件，绝对的一劳永逸。</p>
-<p>Nginx 还是太需要学起来的，简单点的配置还不难，想要融会贯通还需要花点时间和精力，nginx 和 js 一样都是入门容易精通难的一项技术，不过网上很多资料可以学习，基本可以满足平时的开发工作了。</p>
-
-  </article>
-
-  <div class="nexmoe-post-meta nexmoe-rainbow">
-    
-        <a class="nexmoefont icon-appstore-fill -link" href="/categories/Nginx/">Nginx</a>
-    
-    
-        <a class="nexmoefont icon-tag-fill -link" href="/tags/Nginx/" rel="tag">Nginx</a>
-    
-</div>
-
-  <div class="nexmoe-post-footer">
-    
       
+<!-- 自定义样式 -->
+<style>
+    .nexmoe-archives .archive ul li {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
-    
-    <section class="nexmoe-comment">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
-<div id="gitalk"></div>
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.16.0/js/md5.min.js"></script>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-        clientID: 'fe1e2afb500870f00186',
-        clientSecret: '0da33dc79b88d4e6eb9beb3510484764a4142bcf',
-        id: md5(window.location.pathname),
-        repo: 'lonelyph.github.io',
-        owner: 'LonelyPH',
-        admin: 'LonelyPH'
-    })
-    gitalk.render('gitalk')
-</script>
+    .nexmoe-archives .archive ul li a {
+        cursor: pointer;
+    }
+</style>
+<section class="nexmoe-archives">
+
+    <article class="archive">
+        
+
+        
+    </article>
 </section>
-  </div>
-</div>
+
+<style>
+    .nexmoe-archives article>*:first-child {
+        margin-top: 0;
+    }
+
+    .nexmoe-archives article>*:last-child {
+        margin-bottom: 0;
+    }
+
+    .nexmoe-archives ul {
+        list-style: none;
+        padding-left: 0 !important;
+    }
+
+    .nexmoe-archives li {
+        position: relative;
+        padding: 10px 0;
+    }
+
+    .nexmoe-archives li::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        background: #ff4e6a;
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -2px;
+        margin-right: 11px;
+        border-radius: 100%;
+        border: 3px solid #fff;
+        z-index: 100;
+        position: relative;
+    }
+
+    .nexmoe-archives li::after {
+        content: "";
+        height: 100%;
+        width: 2px;
+        background: rgba(255, 78, 106, 0.2);
+        position: absolute;
+        left: 6px;
+        top: 20px;
+    }
+
+    .nexmoe-archives li:last-child:after {
+        display: none;
+    }
+
+    .nexmoe-archives span {
+        margin-right: 15px;
+    }
+</style>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
@@ -474,7 +412,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1599671502722"></script>
+<script src="/js/app.js?v=1599671502816"></script>
   
 
 
