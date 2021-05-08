@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" >
+
+<head>
+  
+  <title>vue+qiankun+lerna微前端实践 - 一梦七年。的博客</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="一派青春撞了南墙，一生热爱回头太难。">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="R9GProVFnk" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="背景基于 single-spa + systemjs 实现的 Mone 微前端架构存在加载缓慢、不利于子应用独立部署、不利于提取公共依赖以及不便于对资源进行压缩等问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue+qiankun+lerna微前端实践">
+<meta property="og:url" content="https://lonelyph.github.io/2021/05/09/vue+qiankun+lerna%E5%BE%AE%E5%89%8D%E7%AB%AF%E5%AE%9E%E8%B7%B5/">
+<meta property="og:site_name" content="一梦七年。的博客">
+<meta property="og:description" content="背景基于 single-spa + systemjs 实现的 Mone 微前端架构存在加载缓慢、不利于子应用独立部署、不利于提取公共依赖以及不便于对资源进行压缩等问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lonelyph.github.io/assets/images/qiankun1.jpg">
+<meta property="article:published_time" content="2021-05-08T16:15:00.000Z">
+<meta property="article:modified_time" content="2021-05-08T16:31:42.640Z">
+<meta property="article:author" content="一梦七年。">
+<meta property="article:tag" content="qiankun">
+<meta property="article:tag" content="lerna">
+<meta property="article:tag" content="monorepo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lonelyph.github.io/assets/images/qiankun1.jpg">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
+    crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1620491683161">-->
+
+  <!-- 自定义样式 -->
+  <style>
+    .custom-nexmoe-bg {
+      opacity: 1 !important;
+      filter: blur(5px) !important;
+    }
+
+    ::-webkit-scrollbar {
+      width: 0;
+      background: transparent !important;
+    }
+
+    #nexmoe-content .nexmoe-primary .nexmoe-post .nexmoe-post-footer .nexmoe-post-copyright a {
+      word-break: break-all;
+    }
+
+    @media screen and (max-width:1024px) {
+      .mdui-appbar.mdui-shadow-0 {
+        background: rgba(255, 0, 0);
+      }
+    }
+  </style>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left custom-body-bg">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg custom-nexmoe-bg" style="background-image: url(/assets/background.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i
+            class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="一梦七年。" class="mdui-btn mdui-btn-icon"><img
+            src="/assets/avatar.jpg" alt="一梦七年。"></a>
+      </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+    <style>
+    .description {
+        width: 230px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 12px;
+        padding: 5px 5px;
+        margin-bottom: 30px;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .custom-nexmoe-count {
+        padding: 0 15px !important;
+    }
+
+    .custom-nexmoe-count :nth-child(2) {
+        margin: 0 15px;
+    }
+
+    .custom-count {
+        display: inline-block;
+        padding: 5px 0;
+        border-radius: 15px;
+        color: #fff !important;
+    }
+
+    .articles,
+    .articles + .count{
+        background-color: #00dbff;
+    }
+
+    .tags,
+    .tags + .count {
+        background-color: #33d57a;
+    }
+
+    .categories,
+    .categories + .count {
+        background-color: #ff761e;
+    }
+
+    .custom-nexmoe-count .count {
+        margin: 5px auto;
+        color: #fff !important;
+        border-radius: 10px;
+    }
+
+</style>
+
+<div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="一梦七年。">
+            <img src="/assets/avatar.jpg" alt="一梦七年。"
+                alt="一梦七年。">
+        </a>
+    </div>
+    
+    <div class="description">
+        <span>一派青春撞了南墙，一生热爱回头太难。</span>
+    </div>
+    
+    <div class="nexmoe-count custom-nexmoe-count">
+        <div>
+            <span class="custom-count articles">
+                文章
+            </span>
+            <span class="count">16</span>
+        </div>
+        <div>
+            <span class="custom-count tags">
+                标签
+            </span>
+            <span class="count">25</span>
+        </div>
+        <div>
+            <span class="custom-count categories">
+                分类
+            </span>
+            <span class="count">9</span>
+        </div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/"
+            title="回到首页">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives"
+            title="文章归档">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about"
+            title="关于博客">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=https://lonelyph.github.io" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/318257003" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/LonelyPH" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/lonelyph" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: #1e88e5;background-color: rgba(30,136,229,.1);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JavaScript/">JavaScript</a>
+          <span class="category-list-count">8</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Vue相关/">Vue相关</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Websocket/">Websocket</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/webpack/">webpack</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/微前端/">微前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/浏览器/">浏览器</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/网络协议/">网络协议</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随笔/">随笔</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Ant-Design-of-Vue/" style="font-size: 10px;">Ant Design of Vue</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vant/" style="font-size: 10px;">Vant</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/Websocket/" style="font-size: 10px;">Websocket</a> <a href="/tags/element-ui/" style="font-size: 10px;">element-ui</a> <a href="/tags/headless-CMS/" style="font-size: 10px;">headless-CMS</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/lerna/" style="font-size: 10px;">lerna</a> <a href="/tags/monorepo/" style="font-size: 10px;">monorepo</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/qiankun/" style="font-size: 10px;">qiankun</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 10px;">组件库</a> <a href="/tags/%E8%85%BE%E8%AE%AFAI/" style="font-size: 10px;">腾讯AI</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/" style="font-size: 10px;">身份证识别</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a>
+    </div>
+    
+  </div>
+
+  
+  
+<style>
+  .nexmoe-widget .article-list a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+</style>
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">最新文章</h3>
+  <div class="nexmoe-widget">
+    <ul class="article-list">
+      
+      <li>
+        <a href="/2021/05/09/vue+qiankun+lerna%E5%BE%AE%E5%89%8D%E7%AB%AF%E5%AE%9E%E8%B7%B5/">vue+qiankun+lerna微前端实践</a>
+      </li>
+      
+      <li>
+        <a href="/2021/01/29/HTTP%E5%92%8CHTTPS%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3/">HTTP和HTTPS协议相关</a>
+      </li>
+      
+      <li>
+        <a href="/2021/01/23/JS%20%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">JS 中的隐式类型转换</a>
+      </li>
+      
+      <li>
+        <a href="/2020/10/06/websocket%E5%AE%9E%E6%97%B6%E5%BC%B9%E7%AA%97%E6%8E%A8%E9%80%81/">Websocket实时弹窗推送 待完成···</a>
+      </li>
+      
+      <li>
+        <a href="/2020/09/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E5%AF%B9%E8%B1%A1/">简单的发布订阅对象</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 一梦七年。
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+      <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 50%;"> 
+          <img data-src="https://lonelyph.github.io/assets/images/五等分的花嫁2.png" data-sizes="auto" alt="vue+qiankun+lerna微前端实践" class="lazyload">
+          <h1>vue+qiankun+lerna微前端实践</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年05月09日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.2k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 9 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#qiankun-框架"><span class="toc-number">2.</span> <span class="toc-text">qiankun 框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#qiankun-简介"><span class="toc-number">2.1.</span> <span class="toc-text">qiankun 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么选择-qiankun"><span class="toc-number">2.2.</span> <span class="toc-text">为什么选择 qiankun</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monorepo"><span class="toc-number">3.</span> <span class="toc-text">Monorepo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-Lerna-yarn-和-qiankun-实现-monorepo-管理方式的-Mone-项目落地"><span class="toc-number">4.</span> <span class="toc-text">基于 Lerna + yarn 和 qiankun 实现 monorepo 管理方式的 Mone 项目落地</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lerna-简介"><span class="toc-number">4.1.</span> <span class="toc-text">lerna 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn-workspace-简介"><span class="toc-number">4.2.</span> <span class="toc-text">yarn workspace 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个-lerna-项目"><span class="toc-number">4.3.</span> <span class="toc-text">创建一个 lerna 项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于-qiankun-vue-搭建-Mone-基座"><span class="toc-number">4.4.</span> <span class="toc-text">基于 qiankun + vue 搭建 Mone 基座</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建更多子应用"><span class="toc-number">4.5.</span> <span class="toc-text">创建更多子应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过-lerna-启动本地运行或打包构建"><span class="toc-number">4.6.</span> <span class="toc-text">通过 lerna 启动本地运行或打包构建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>基于 <code>single-spa</code> + <code>systemjs</code> 实现的 Mone 微前端架构存在加载缓慢、不利于子应用独立部署、不利于提取公共依赖以及不便于对资源进行压缩等问题。</p>
+<a id="more"></a>
+
+<h2 id="qiankun-框架"><a href="#qiankun-框架" class="headerlink" title="qiankun 框架"></a>qiankun 框架</h2><h3 id="qiankun-简介"><a href="#qiankun-简介" class="headerlink" title="qiankun 简介"></a>qiankun 简介</h3><p><code>qiankun</code>是阿里开源的一款基于<code>single-spa</code>封装的微前端框架，目前已经过阿里多款产品实践，是目前较为成熟的微前端框架。<code>qiankun</code>在<code>single-spa</code>的基础上封装了许多功能，弥补了<code>single-spa</code>的不足同时也带来了新的功能，如下图：</p>
+<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/qiankun1.jpg" alt="qiankun1" class="lazyload"></p>
+<h3 id="为什么选择-qiankun"><a href="#为什么选择-qiankun" class="headerlink" title="为什么选择 qiankun"></a>为什么选择 qiankun</h3><p>考虑到 Mone 目前需要的优化以及后期的扩展性，<code>qiankun</code>比较符合当前的场景需求，同时<code>qiankun</code>经过实际大型项目的考验，可以放心使用，最后<code>qiankun</code>官方文档较为友好，便于上手，因此我们选择使用<code>qiankun</code>来重构 Mone。</p>
+<h2 id="Monorepo"><a href="#Monorepo" class="headerlink" title="Monorepo"></a>Monorepo</h2><p>Monorepo(monolithic repository)是管理项目代码的一种方式，区别于传统的一个项目一个库的模式，monorepo 提倡将多个项目集中到一个库下进行管理。目前已有许多知名项目采用了这种方式如：Babel、Vue3 等。</p>
+<p>monorepo 实现的项目结构大致如下：</p>
+<pre><code>├── packages
+|   ├── pkg1
+|   |   ├── package.json
+|   ├── pkg2
+|   |   ├── package.json
+├── package.json</code></pre><p>其中 packages 下面是一个个不同项目/包，每个项目/包有自己的依赖文件。Monorepo 最主大的好处是工作流程的统一性，无需切换 repo，多个项目的修改在一个 repo 下完成，统一测试、统一发版，只需要一套配置就可以管理多个包的构建、测试 和发布。但是在一个 repo 下管理项目也存在弊端，随着 packages 下的包越来越多，整个 repo 会越来越庞大，甚至由于每个包都用独立的依赖，node_modules 将存在许多重复的包，造成不必要的资源浪费。</p>
+<p>随着 packages 下的项目/包越来越多，repo 的体积会变大是肯定的，但是重复的依赖却是可以想办法提取的，因此采用 Monorepo 的管理方式还是比较符合目前 Mone 的整体结构和需求。</p>
+<h2 id="基于-Lerna-yarn-和-qiankun-实现-monorepo-管理方式的-Mone-项目落地"><a href="#基于-Lerna-yarn-和-qiankun-实现-monorepo-管理方式的-Mone-项目落地" class="headerlink" title="基于 Lerna + yarn 和 qiankun 实现 monorepo 管理方式的 Mone 项目落地"></a>基于 Lerna + yarn 和 qiankun 实现 monorepo 管理方式的 Mone 项目落地</h2><h3 id="lerna-简介"><a href="#lerna-简介" class="headerlink" title="lerna 简介"></a>lerna 简介</h3><p>lerna 是一种工具，针对使用 git 和 npm 管理多软件包代码仓库的工作流程进行优化,lerna 可以较好的进行包版本管理，使用配备的命令对包同时进行运行、打包及发布等，由于本人目前对 lerna 的了解和使用也不算多，更多的优势和缺点任然需要在实践中慢慢摸索体会，如果碰巧你的项目中需要用到这些能力，请尽情去尝试它。</p>
+<h3 id="yarn-workspace-简介"><a href="#yarn-workspace-简介" class="headerlink" title="yarn workspace 简介"></a>yarn workspace 简介</h3><p>Yarn workspace 能更好的统一管理有多个项目的仓库，既可在每个项目下使用独立的 package.json 管理依赖，又可便利的享受一条 yarn 命令安装或者升级所有依赖等。更重要的是，yarn 可以提取各个项目中的公共依赖，使多个项目共享同一个 <code>node_modules</code> 目录，提升开发效率和降低磁盘空间占用。</p>
+<h3 id="创建一个-lerna-项目"><a href="#创建一个-lerna-项目" class="headerlink" title="创建一个 lerna 项目"></a>创建一个 lerna 项目</h3><p>通过以下命令可以初始化一个 lerna 管理的项目</p>
+<pre><code>// 创建一个git仓库文件夹，并初始化成lerna仓库
+&gt; git init lerna-repo &amp;&amp; cd lerna-repo
+&gt; lerna init</code></pre><p>初始化后整个仓库的结构大致如下：</p>
+<pre><code>lerna-repo/
+  packages/
+  package.json
+  lerna.json</code></pre><p>在 lerna.json 中加上以下配置：</p>
+<pre><code class="json">&quot;npmClient&quot;: &quot;yarn&quot;, // 使用yarn作为npm工具
+&quot;useWorkspaces&quot;: true, // 使用yarn workspaces</code></pre>
+<p>package.json 中大致配置如下：</p>
+<pre><code class="json">// package.json
+{
+  &quot;name&quot;: &quot;root&quot;,
+  &quot;private&quot;: true,
+  &quot;workspaces&quot;: [
+    //指定workspace路径
+    &quot;packages/*&quot;
+  ],
+  &quot;devDependencies&quot;: {
+    &quot;lerna&quot;: &quot;^3.22.1&quot; // 当前使用的lerna版本
+  }
+}</code></pre>
+<p>一个基本的 lerna 仓库基本上就配置好了，当然还可以有更多配置，但目前我们只需要这些，如果你需要用到其他配置可以自行参考网上的资料。例如我们可以在 package.json 中配置基于 commitizen 的 commit 规范设置等。</p>
+<p>基本的架子搭好之后我们可以进入 packages 目录下开始创建我们需要的项目，流程跟平时一样，唯一的不同是这些项目将会被 lerna 管理起来。</p>
+<p>由于我们是基于原有项目进行的改造，我们只需要把原有的项目全都放到 packages 下即可。</p>
+<h3 id="基于-qiankun-vue-搭建-Mone-基座"><a href="#基于-qiankun-vue-搭建-Mone-基座" class="headerlink" title="基于 qiankun + vue 搭建 Mone 基座"></a>基于 qiankun + vue 搭建 Mone 基座</h3><p>通过上面的创建 lerna 仓库的步骤创建一个项目目录，在 packages 目录下使用 vue-cil 创建我们的基座项目（即 Mone 主项目），在主项目下安装 qiankun 框架，在入口文件中按照 qiankun 的指引，引入注册子应用的 API，处理哈希路由模式，如果有需要通过 props 配置传递需要的数据，一个微前端项目基本就搭建成功了。最后只需要在挂载子应用的地方调用 start 方法即可。</p>
+<pre><code class="js">import { registerMicroApps } from &quot;qiankun&quot;;
+
+new Vue({
+  router,
+  store,
+  i18n,
+  render: (h) =&gt; h(App),
+}).$mount(&quot;#app&quot;);
+
+// 注册子应用 其中变量 MicroApps 为按照qiankun给的格式构建的子应用数组
+// 第二个参数传入了一个配置对象，包含了子应用的三个生命周期
+registerMicroApps(MicroApps, {
+  beforeLoad: (app) =&gt; console.log(&quot;before load11111&quot;, app.name),
+  beforeMount: [
+    (app) =&gt; {
+      console.log(&quot;before Mount1111&quot;, app.name);
+    },
+  ],
+  beforeUnmount: (app) =&gt; {
+    console.log(&quot;before Unmount&quot;, app.name);
+  },
+});</code></pre>
+<pre><code class="js">// MicroApps
+import store from &quot;./store&quot;;
+
+const getActiveRule = (hash) =&gt; (location) =&gt; location.hash.startsWith(hash);
+export default [
+  {
+    name: &quot;osg&quot;,
+    entry: process.env.VUE_APP_MONE_OSG, // 全局配置的环境变量
+    container: &quot;#subapp&quot;,
+    activeRule: getActiveRule(&quot;#/osg&quot;), // https://qiankun.umijs.org/zh/cookbook#微应用的路由模式如何选择
+    props: {
+      userInfo: store.state.user.userInfo, //共享主应用的store的用户信息
+    },
+  },
+];</code></pre>
+<pre><code class="js">// 判断是否是是否是微前端模式，使用乾坤启动后会在全局挂载这个变量，用于判断当前
+// 的模式是独立运行还是微前端，更多启动配置参考qiankun官方文档
+if (!window.qiankunStarted) {
+  window.qiankunStarted = true;
+  start({
+    prefetch: &quot;all&quot;, // 启动时预加载所有子应用静态资源
+  });
+}
+
+// 子应用入口文件引入下面代码以动态修改运行时的资源路径
+// 修改运行时publicPath 如果是微前端模式则修改，否则不做处理
+if (window.__POWERED_BY_QIANKUN__) {
+  // eslint-disable-next-line no-undef
+  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
+  console.log(`subapp-osg:${__webpack_public_path__}`);
+}</code></pre>
+<h3 id="创建更多子应用"><a href="#创建更多子应用" class="headerlink" title="创建更多子应用"></a>创建更多子应用</h3><p>基于上面的配置，在 packages 目录下创建更多子应用项目，每个子应用的入口文件都需要引入修改资源路径的代码及抛出生命周期钩子。</p>
+<pre><code class="js">let instance = null; // 子应用实例
+let osgRouter = router; // 子应用路由
+
+// 渲染函数
+function render(props = {}) {
+  const { container } = props; // 获取主应用传入的参数
+
+  instance = new Vue({
+    router: osgRouter,
+    store,
+    render: (h) =&gt; h(App),
+  }).$mount(container ? container.querySelector(&quot;#app&quot;) : &quot;#app&quot;);
+}
+
+// 作为独立应用运行
+if (!window.__POWERED_BY_QIANKUN__) {
+  render();
+}
+
+export async function bootstrap() {}
+
+export async function mount(props) {
+  store.state.userInfo = props.userInfo;
+  render(props);
+}
+
+// 卸载时销毁子应用实例
+export async function unmount() {
+  instance.$destroy();
+  instance.$el.innerHTML = &quot;&quot;;
+  instance = null;
+}</code></pre>
+<h3 id="通过-lerna-启动本地运行或打包构建"><a href="#通过-lerna-启动本地运行或打包构建" class="headerlink" title="通过 lerna 启动本地运行或打包构建"></a>通过 lerna 启动本地运行或打包构建</h3><pre><code class="bash">// 清除应用下所有依赖包
+&gt; lerna clean
+// 引导安装依赖，如果配置了yarn workspace将会调用 yarn install --hoist进行依赖提升安装，将相同的依赖安装到根目录,并链接所有的交叉依赖
+&gt; lerna bootstrap
+// 本地运行 将会对packages目录下所有子项目进行 npm run serve操作，子应用必须有自己的package.json文件并配置serve命令
+&gt; lerna run serve
+// 同本地运行命令类似，运行所有子项目的构建命令
+&gt; lerna run build
+
+// 通过 lerna 进行 publish,将packages目录下的包进行发布版
+&gt; lerna publish</code></pre>
+<p>更多命令参考<a href="https://lernajs.bootcss.com/" target="_blank" rel="noopener">lerna 官方文档</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>目前微前端的实践已经算比较成熟，网络上也有比较多的资料参考，这次 Mone 的微前端落地参考了许多资料，其实 monorepo 的仓库管理方式更适合做框架项目或者组件库等 npm 包，之所以用来管理微前端项目最大的原因其实是为了更好的依赖管理和依赖共用，此次实践仅仅是使用到了 lerna 的一点点功能，更强大的包与包之间依赖的场景还未用到，初次尝试也还未更深入的研究 lerna，在此仅作为一个微前端的实现参考，如需进行组件库等的实现，可以进一步研究方案。</p>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/">微前端</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/lerna/" rel="tag">lerna</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/monorepo/" rel="tag">monorepo</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/qiankun/" rel="tag">qiankun</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.16.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'fe1e2afb500870f00186',
+        clientSecret: '0da33dc79b88d4e6eb9beb3510484764a4142bcf',
+        id: md5(window.location.pathname),
+        repo: 'lonelyph.github.io',
+        owner: 'LonelyPH',
+        admin: 'LonelyPH'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+<script src="/js/app.js?v=1620491683163"></script>
+  
+
+
+
+
+
+</body>
+
+</html>
