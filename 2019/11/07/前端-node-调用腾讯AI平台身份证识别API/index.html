@@ -18,27 +18,27 @@
   <meta name="description" content="前端 + node 调用腾讯AI平台身份证识别API最近在做一个身份证信息获取的功能，用到了腾讯AI平台的OCR接口，踩了些坑，最终还是填坑实现了。 那么下面简单说下成功调用腾讯AI平台OCR身份证识别的具体步骤:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端 + node 调用腾讯AI平台身份证识别API">
-<meta property="og:url" content="https://lonelyph.github.io/2019/11/07/%E5%89%8D%E7%AB%AF-node-%E8%B0%83%E7%94%A8%E8%85%BE%E8%AE%AFAI%E5%B9%B3%E5%8F%B0%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%ABAPI/">
+<meta property="og:url" content="https://strongerlph.github.io/2019/11/07/%E5%89%8D%E7%AB%AF-node-%E8%B0%83%E7%94%A8%E8%85%BE%E8%AE%AFAI%E5%B9%B3%E5%8F%B0%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%ABAPI/">
 <meta property="og:site_name" content="一梦七年。的博客">
 <meta property="og:description" content="前端 + node 调用腾讯AI平台身份证识别API最近在做一个身份证信息获取的功能，用到了腾讯AI平台的OCR接口，踩了些坑，最终还是填坑实现了。 那么下面简单说下成功调用腾讯AI平台OCR身份证识别的具体步骤:">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lonelyph.github.io/assets/images/tencent_ocr_api.png">
-<meta property="og:image" content="https://lonelyph.github.io/assets/images/tencent_ocr_api_node.png">
-<meta property="og:image" content="https://lonelyph.github.io/assets/images/tencent_ocr_api_request.png">
-<meta property="og:image" content="https://lonelyph.github.io/assets/images/tencent_ocr_api_request_pass.png">
+<meta property="og:image" content="https://strongerlph.github.io/assets/images/tencent_ocr_api.png">
+<meta property="og:image" content="https://strongerlph.github.io/assets/images/tencent_ocr_api_node.png">
+<meta property="og:image" content="https://strongerlph.github.io/assets/images/tencent_ocr_api_request.png">
+<meta property="og:image" content="https://strongerlph.github.io/assets/images/tencent_ocr_api_request_pass.png">
 <meta property="article:published_time" content="2019-11-07T09:09:58.000Z">
-<meta property="article:modified_time" content="2020-06-24T18:08:35.441Z">
+<meta property="article:modified_time" content="2021-06-25T06:34:11.264Z">
 <meta property="article:author" content="一梦七年。">
 <meta property="article:tag" content="nodejs">
 <meta property="article:tag" content="腾讯AI">
 <meta property="article:tag" content="身份证识别">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lonelyph.github.io/assets/images/tencent_ocr_api.png">
+<meta name="twitter:image" content="https://strongerlph.github.io/assets/images/tencent_ocr_api.png">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
     crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1624602150436">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1624603209624">-->
 
   <!-- 自定义样式 -->
   <style>
@@ -359,7 +359,7 @@
       <div class="nexmoe-post">
   
       <div class="nexmoe-post-cover" style="padding-bottom: 60%;"> 
-          <img data-src="https://lonelyph.github.io/assets/images/mayi.jpg" data-sizes="auto" alt="前端 + node 调用腾讯AI平台身份证识别API" class="lazyload">
+          <img data-src="/assets/images/mayi.jpg" data-sizes="auto" alt="前端 + node 调用腾讯AI平台身份证识别API" class="lazyload">
           <h1>前端 + node 调用腾讯AI平台身份证识别API</h1>
       </div>
   
@@ -393,20 +393,20 @@
 <li><p>第二步通过第一步可以在创建的应用中拿到app_id和app_key，那么接下来就需要用到这两个值。由于我调用的是身份证识别，身份证识别需要的参数如下图(这里注意有个容易错的点，就是图片base64格式是不需要(data:image/jpg;base64,)头部的，全程都不需要这个头部，接口鉴权不需要，后面调用接口也不要):</p>
 </li>
 </ul>
-<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/tencent_ocr_api.png" alt="腾讯身份证OCR接口文档" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="/assets/images/tencent_ocr_api.png" alt="腾讯身份证OCR接口文档" class="lazyload"></p>
 <ul>
 <li>第三步根据调用的接口所需参数进行接口鉴权，我这里是调用的身份证识别，要参与到鉴权中的参数有app_id、time_stamp、nonce_str、image、card_type这5个参数，通过鉴权得到sign参数，因为我主要做的是前端，所以后端自己只是简单处理了一下，主要代码如下图:</li>
 </ul>
-<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/tencent_ocr_api_node.png" alt="腾讯身份证OCR接口代码" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="/assets/images/tencent_ocr_api_node.png" alt="腾讯身份证OCR接口代码" class="lazyload"></p>
 <blockquote>
 <p>[注意]: 调用不同功能接口，所需参数 不一样，那么鉴权所需的参数也不一样，具体的跟你要调用的接口参数去设置，只有产生随机串，时间戳以及MD5加密这些方法函数，可以网上找，这里就不贴出来了。</p>
 </blockquote>
 <ul>
 <li>第四步就是前端获取上面产生的参数，然后去调用接口了。按照文档要求，用POST请求方式，但是要注意，请求主体需要用application/x-www-form-urlencoded格式，所有请求要设置请求头Content-Type: application/x-www-form-urlencoded，并且请求用的参数也要是这个格式，我主要就是在这里 踩的坑，没有将参数拼接成url键值对的形式就去请求接口了，所以一直返回4096非法参数。下面看前端请求代码:</li>
 </ul>
-<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/tencent_ocr_api_request.png" alt="腾讯身份证OCR前端请求代码" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="/assets/images/tencent_ocr_api_request.png" alt="腾讯身份证OCR前端请求代码" class="lazyload"></p>
 <p>OK，按照以上步骤接口成功调通，如果遇到4096错误，最好看看Network中发出请求的裸参数是不是application/x-www-form-urlencoded格式的:</p>
-<p><img data-sizes="auto" data-src="https://lonelyph.github.io/assets/images/tencent_ocr_api_request_pass.png" alt="腾讯身份证OCR接口调通信息" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="/assets/images/tencent_ocr_api_request_pass.png" alt="腾讯身份证OCR接口调通信息" class="lazyload"></p>
 <p>如果裸参数是上面的格式那么就是正确的，注意这个不是JSON，两端不能有{ 和 }。其他错误应该都好解决，具体可以参照官方文档上的错误码一一调试，但是产生4096错误就有很多原因了，在参数和鉴权都没问题的情况下，很可能就是发请求时的参数格式不对，没有使用url键值对格式的参数。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>当时做这个功能的时候遇到这个问题，网上找了好多资料，大都是PHP、JAVA、Python的，没见到有能解决自己遇到这个问题的JS语言的资料，所以这里就记录一下，希望对遇到跟我一样问题的小伙伴有用。不足之处，敬请指教，非常感谢！</p>
 
@@ -454,7 +454,7 @@
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
 
 
-<script src="/js/app.js?v=1624602150437"></script>
+<script src="/js/app.js?v=1624603209626"></script>
   
 
 
