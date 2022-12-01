@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" >
+
+<head>
+  
+  <title>创业公司如何实现快速开发 - 一梦七年。的博客</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="一派青春撞了南墙，一生热爱回头太难。">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="R9GProVFnk" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="本文是一篇翻译文章，内容主要是围绕创业公司的快速开发提出了一些可行的方法和建议。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创业公司如何实现快速开发">
+<meta property="og:url" content="https://strongerlph.github.io/2022/11/30/%E5%88%9B%E4%B8%9A%E5%85%AC%E5%8F%B8%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/">
+<meta property="og:site_name" content="一梦七年。的博客">
+<meta property="og:description" content="本文是一篇翻译文章，内容主要是围绕创业公司的快速开发提出了一些可行的方法和建议。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-30T12:48:00.000Z">
+<meta property="article:modified_time" content="2022-12-01T11:48:46.521Z">
+<meta property="article:author" content="一梦七年。">
+<meta property="article:tag" content="开发">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css"
+    crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1669895886766">-->
+
+  <!-- 自定义样式 -->
+  <style>
+    .custom-nexmoe-bg {
+      opacity: 1 !important;
+      filter: blur(5px) !important;
+    }
+
+    ::-webkit-scrollbar {
+      width: 0;
+      background: transparent !important;
+    }
+
+    #nexmoe-content .nexmoe-primary .nexmoe-post .nexmoe-post-footer .nexmoe-post-copyright a {
+      word-break: break-all;
+    }
+
+    @media screen and (max-width:1024px) {
+      .mdui-appbar.mdui-shadow-0 {
+        background: rgba(255, 0, 0);
+      }
+    }
+  </style>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left custom-body-bg">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg custom-nexmoe-bg" style="background-image: url(/assets/background.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i
+            class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="一梦七年。" class="mdui-btn mdui-btn-icon"><img
+            src="/assets/avatar.jpg" alt="一梦七年。"></a>
+      </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+    <style>
+    .description {
+        width: 230px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 12px;
+        padding: 5px 5px;
+        margin-bottom: 30px;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .custom-nexmoe-count {
+        padding: 0 15px !important;
+    }
+
+    .custom-nexmoe-count :nth-child(2) {
+        margin: 0 15px;
+    }
+
+    .custom-count {
+        display: inline-block;
+        padding: 5px 0;
+        border-radius: 15px;
+        color: #fff !important;
+    }
+
+    .articles,
+    .articles + .count{
+        background-color: #00dbff;
+    }
+
+    .tags,
+    .tags + .count {
+        background-color: #33d57a;
+    }
+
+    .categories,
+    .categories + .count {
+        background-color: #ff761e;
+    }
+
+    .custom-nexmoe-count .count {
+        margin: 5px auto;
+        color: #fff !important;
+        border-radius: 10px;
+    }
+
+</style>
+
+<div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="一梦七年。">
+            <img src="/assets/avatar.jpg" alt="一梦七年。"
+                alt="一梦七年。">
+        </a>
+    </div>
+    
+    <div class="description">
+        <span>一派青春撞了南墙，一生热爱回头太难。</span>
+    </div>
+    
+    <div class="nexmoe-count custom-nexmoe-count">
+        <div>
+            <span class="custom-count articles">
+                文章
+            </span>
+            <span class="count">19</span>
+        </div>
+        <div>
+            <span class="custom-count tags">
+                标签
+            </span>
+            <span class="count">28</span>
+        </div>
+        <div>
+            <span class="custom-count categories">
+                分类
+            </span>
+            <span class="count">11</span>
+        </div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/"
+            title="回到首页">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives"
+            title="文章归档">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about"
+            title="关于博客">
+            <i
+                class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=https://strongerlph.github.io" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/318257003" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/StrongerLph" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/lonelyph" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: #1e88e5;background-color: rgba(30,136,229,.1);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CSS-CSS3/">CSS/CSS3</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JavaScript/">JavaScript</a>
+          <span class="category-list-count">9</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Vue相关/">Vue相关</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Websocket/">Websocket</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/webpack/">webpack</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/微前端/">微前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/浏览器/">浏览器</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/网络协议/">网络协议</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/翻译/">翻译</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随笔/">随笔</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Ant-Design-of-Vue/" style="font-size: 10px;">Ant Design of Vue</a> <a href="/tags/BFC/" style="font-size: 10px;">BFC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vant/" style="font-size: 10px;">Vant</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/Websocket/" style="font-size: 10px;">Websocket</a> <a href="/tags/element-ui/" style="font-size: 10px;">element-ui</a> <a href="/tags/headless-CMS/" style="font-size: 10px;">headless-CMS</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/lerna/" style="font-size: 10px;">lerna</a> <a href="/tags/monorepo/" style="font-size: 10px;">monorepo</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/qiankun/" style="font-size: 10px;">qiankun</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 10px;">组件库</a> <a href="/tags/%E8%85%BE%E8%AE%AFAI/" style="font-size: 10px;">腾讯AI</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/" style="font-size: 10px;">身份证识别</a> <a href="/tags/%E9%97%AD%E5%8C%85/" style="font-size: 10px;">闭包</a>
+    </div>
+    
+  </div>
+
+  
+  
+<style>
+  .nexmoe-widget .article-list a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+</style>
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">最新文章</h3>
+  <div class="nexmoe-widget">
+    <ul class="article-list">
+      
+      <li>
+        <a href="/2022/11/30/%E5%88%9B%E4%B8%9A%E5%85%AC%E5%8F%B8%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/">创业公司如何实现快速开发</a>
+      </li>
+      
+      <li>
+        <a href="/2022/05/28/CSS%E7%9A%84%E5%9D%97%E7%BA%A7%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88BFC%EF%BC%89/">CSS的块格式化上下文（BFC）</a>
+      </li>
+      
+      <li>
+        <a href="/2022/05/28/%E6%95%B0%E7%BB%84%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/">js数组数据处理方法合集</a>
+      </li>
+      
+      <li>
+        <a href="/2021/05/09/vue+qiankun+lerna%E5%BE%AE%E5%89%8D%E7%AB%AF%E5%AE%9E%E8%B7%B5/">vue+qiankun+lerna微前端实践</a>
+      </li>
+      
+      <li>
+        <a href="/2021/01/29/HTTP%E5%92%8CHTTPS%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3/">HTTP和HTTPS协议相关</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 一梦七年。
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+      <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 50%;"> 
+          <img data-src="/assets/images/minjiediedai.png" data-sizes="auto" alt="创业公司如何实现快速开发" class="lazyload">
+          <h1>创业公司如何实现快速开发</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年11月30日</a>
+    <a><i class="nexmoefont icon-areachart"></i>3.6k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 14 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创业公司如何实现快速开发"><span class="toc-number">1.</span> <span class="toc-text">创业公司如何实现快速开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、避免特性分支"><span class="toc-number">1.1.</span> <span class="toc-text">一、避免特性分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、自动化-CI-CD-流水线"><span class="toc-number">1.2.</span> <span class="toc-text">二、自动化 CI&#x2F;CD 流水线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、使用-monorepo"><span class="toc-number">1.3.</span> <span class="toc-text">三、使用 monorepo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将功能分解为更小的、增量的变化"><span class="toc-number">1.4.</span> <span class="toc-text">将功能分解为更小的、增量的变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用特性标识"><span class="toc-number">1.5.</span> <span class="toc-text">使用特性标识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指定负责人"><span class="toc-number">1.6.</span> <span class="toc-text">指定负责人</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#每周至少一次演示"><span class="toc-number">1.7.</span> <span class="toc-text">每周至少一次演示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#每周部署"><span class="toc-number">1.8.</span> <span class="toc-text">每周部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冻结要发布的代码"><span class="toc-number">1.9.</span> <span class="toc-text">冻结要发布的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写单元测试"><span class="toc-number">1.10.</span> <span class="toc-text">编写单元测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.11.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <p>本文是一篇翻译文章，内容主要是围绕创业公司的快速开发提出了一些可行的方法和建议。</p>
+<a id="more"></a>
+
+<h2 id="创业公司如何实现快速开发"><a href="#创业公司如何实现快速开发" class="headerlink" title="创业公司如何实现快速开发"></a>创业公司如何实现快速开发</h2><p>在一个公司的任何阶段，能够快速开发产品都是一个巨大的优势。作为公司的创始人来说，你总是想要把所有的事情做好，以此来发展客户公司合服务你的客户。</p>
+<p>在过去的几年中，我有幸与许多建立不到 4 年的公司合作，我发现这些公司都有同样的问题，那就是复杂并且拖拉的软件开发合交付过程。积极性是快速开发的一个必不可少的条件，但是这篇文章，我们将专注于整个过程和实现它的具体步骤上。</p>
+<p>在我们进入快速开发产品的过程之前，我想说的一件事是：如非必须，请不要自己建造轮子，尽量使用能满足需求的第三方工具或服务，这是一个不错的策略。</p>
+<h3 id="一、避免特性分支"><a href="#一、避免特性分支" class="headerlink" title="一、避免特性分支"></a>一、避免特性分支</h3><p>在深入讨论高效流程的细节之前，我想先提一个很多公司经常使用的流程，它通常会在很大程度上降低产品的交付效率，这个流程就是特性分支。开发人员在开发一个新的功能时，会单独创建一个新的分支来开发新功能，等到新功能开发完了再将其与主分支合并。</p>
+<p>开发一个新功能通常需要几周甚至几个月的时间，所以也因此而造成了下面这些问题：</p>
+<ul>
+<li>新功能开发完成后，需要大量时间来处理代码合并。</li>
+<li>代码合并后很可能会导致新的 bug，增加不稳定性。</li>
+<li>不利于增量重构。</li>
+</ul>
+<p>这种开发方式在小团队可能还比较适用，但是当团队中合作的工程师超过 5 位以上时，效率就开始变低了。如果你的团队使用这种方法，将会给你的交付效率造成很大的影响。无论如何都应该避免。</p>
+<h3 id="二、自动化-CI-CD-流水线"><a href="#二、自动化-CI-CD-流水线" class="headerlink" title="二、自动化 CI/CD 流水线"></a>二、自动化 CI/CD 流水线</h3><p>我希望每个初创公司都使用”持续集成和持续部署“ —— 即构建-测试-发布流程的自动化。说简单点就是，每当开发人员发布代码时，自动化流程能感知并获取最新的代码并将它编译、打包、部署到模拟环境和生产环境中。</p>
+<p>10 年前，Jenkins 和 TeamCity 是实现 CI/CD 的不二选择，它们需要大量的配置，但是在自动化方面做的很好。</p>
+<p>7 年前，类似 Drone CI 和 Circle CI 这种使用 docker 构建和测试产品的工具开始流行起来。</p>
+<p>3 年前，GitHub Actions 变得非常流行。它们也使用 docker 镜像，但是它们还集成了版本控制系统，并且允许你创建非常复杂的 CI/CD 流水线。</p>
+<p>在过去的两年中，像 Vercel 和 Render 这样的非常简单并且集成度很高的工具开始出现。这些工具自带了预先构建好的 CI/CD 流水线，开箱即用，非常方便：</p>
+<ul>
+<li>开发人员将代码推送到主分支。</li>
+<li>代码变动自动被更新到生产环境中去。</li>
+</ul>
+<p>它们还经常自动化执行一些常规的 DevOps 任务，比如环境变量管理、SSL 证书以及基本扩展。</p>
+<p>事实上，使用什么工具并不重要 —— 最重要的以及迈向快速交付的第一步是完全自动化的 CI/CD。这将会为你节省大量手动部署的时间，并且让你可以在一天中实现多次部署。</p>
+<h3 id="三、使用-monorepo"><a href="#三、使用-monorepo" class="headerlink" title="三、使用 monorepo"></a>三、使用 monorepo</h3><p>monorepo(单仓库多项目架构)让事情变得简单、有条理和透明 —— 在这里你可以看到正在发生的事。拥有多个仓库，可以使用不同的方法来构建和部署你的产品，特别是当你的团队开始成长时。</p>
+<p>monorepo 有以下优点：</p>
+<ul>
+<li>所有代码可见，并且单一的源码。</li>
+<li>单个仓库下代码共享比较容易(有一些像 Turborepo 的工具，可以使之更简单)。</li>
+<li>单你需要查找一些代码或变量等，在单个仓库下会更容易查找。</li>
+<li>可以更简单的构建 CI/CD 流程，因为所有代码都在一个仓库里面。</li>
+</ul>
+<h3 id="将功能分解为更小的、增量的变化"><a href="#将功能分解为更小的、增量的变化" class="headerlink" title="将功能分解为更小的、增量的变化"></a>将功能分解为更小的、增量的变化</h3><p>小的、增量的变化是快速开发产品的关键。通过较小的更改，团队会倾向于应用更好的软件开发实践。即使是很小的改动也需要经过测试，以确保没有引入任何 bug,旧的功能依然按预期工作。</p>
+<p>以下是为什么增量变化如此重要的三个主要原因：</p>
+<ul>
+<li>更快的反馈(如果方向错误，这一点尤其重要)。</li>
+<li>代码冲突更少，更易于代码合并。</li>
+<li>降低了系统中大模块出问题的概率。</li>
+</ul>
+<p>小的迭代可以提高团队的效率和质量。通常，你可以对工程师和产品团队使用两个简单的规划：</p>
+<ul>
+<li>对于产品团队：任何任务都不应超过 3 天，平均 1-2 天。</li>
+<li>对于工程师团队：每个工程师都应该确保每 2 天 pull 一次代码，每天提交一次代码。</li>
+</ul>
+<p>这些规范培养了团队每个成员的迭代思维。产品团队需要考量和设计更小的功能迭代。工程师团队需要经常合并他们的变更，并且要考虑如何合并甚至是没有完成的特性。特性标识有利于解决这个问题。</p>
+<h3 id="使用特性标识"><a href="#使用特性标识" class="headerlink" title="使用特性标识"></a>使用特性标识</h3><p>特性标识(也称为特性切换)是一种允许您在不编写代码的情况下更改产品功能的技术。工程师创建特性标识，并通过某种方式像产品和数据团队公开它们。</p>
+<p>特性标识带来的影响团队绩效的两个关键过程变化是：</p>
+<ul>
+<li>工程师可以发布部分完成的特性，因此这些变动可以经常被审查和合并。</li>
+<li>产品团队可以在早期进行评审并提供反馈。</li>
+</ul>
+<p>这里有一个关于<a href="https://growing-products.paralect.com/5-reasons-why-top-product-teams-use-feature-flags-to-avoid-poor-ux" target="_blank" rel="noopener">为什么特性标识很重要的更深入的回顾</a>，我们使用<a href="https://growthflags.com/" target="_blank" rel="noopener">Growthflags</a>来实现特性标识。</p>
+<h3 id="指定负责人"><a href="#指定负责人" class="headerlink" title="指定负责人"></a>指定负责人</h3><p>指定一个小团队负责建每个功能特性交付到产品中，可以提高开发速度和质量。通常，这个团队由负责产品的人和来自工程师团队的人组成。他们的目标是部署每一个功能特性 —— 他们不受任何人的决定的阻碍并且他们应该要解决所有的阻碍。他们会设定一个截止日期，并努力在此之前发布新的功能特性。</p>
+<p>清晰的划分各自责任的一些建议：</p>
+<ul>
+<li>避免共同责任陷阱。即没有人对某件事负责，工作也没有完成。</li>
+<li>激发个人责任感。功能的负责人很清楚没有人会替他们完成他们的工作。</li>
+</ul>
+<p>实行责任人规则可以像创建一个包含功能名称、开发负责人、产品负责人和发布日期的电子表格一样简单。在 concept 或者 Jira 等工具中，你可以添加自定义列以达到这个目的。</p>
+<p>使用 Sprint/产品规划来定义功能的归属关系。通常情况下，我们每个月都会有一个产品规划，以便于回顾上个月的进展，设定眼下的目标，分配任务给每个责任人，以及确定所有功能的截止日期。</p>
+<p>在 Sprint 规划期间，我们通常要花较多时间来拆分功能，尽可能分解成最小的需求。</p>
+<h3 id="每周至少一次演示"><a href="#每周至少一次演示" class="headerlink" title="每周至少一次演示"></a>每周至少一次演示</h3><p>一旦你为每个功能指定了负责人，你应该定义一个明确的流程来记录和演示。演示可以让团队成员像用户一样来思考问题，帮助我们在功能上线之前乃至在测试之前发现一些问题。</p>
+<p>如果你的团队在不同的时区工作，那么离线演示可以随时为您提供及时反馈。早期的演示甚至还可以作为 QA(测试)文档、帮助文档或者其他团队文档。分享早期演示并获得一些反馈可以极大的提高产品的质量和交付效率，因为你减少了迭代次数。(演示可以提前发现问题修复问题避免绕更多弯路，确保大方向的正确性)</p>
+<p>通常情况下，应该要求团队在一下阶段提供演示：</p>
+<ol>
+<li>原型演示：早期的设计演示，多数情况是 UI，也会有些数据结构、接口设计等。通常会调整功能的方向。</li>
+<li>预览演示：当功能开发的差不多了，只是还需要修缮，一般在提测前。</li>
+<li>Beta 演示：功能进入 Beta 测试阶段，可以在测试环境中使用对应的功能。</li>
+<li>预发布演示：即功能即将发布到生产环境之前的最后一次演示。</li>
+</ol>
+<p>经验之谈是每个致力于特定功能的团队每周都应该提供 1-2 个演示。</p>
+<h3 id="每周部署"><a href="#每周部署" class="headerlink" title="每周部署"></a>每周部署</h3><p>使用自动化 CI/CD 流水线，部署项目就像切换分支一样简单。但事实上，它也是有相关的风险的：</p>
+<ul>
+<li>数据库迁移失败或者迁移缓慢。</li>
+<li>新功能在生产环境可能无法按预期的工作。</li>
+<li>应用会变得很慢，影响用户体验。</li>
+</ul>
+<p>这个清单还可以写很多，但中心思想是，即使是完全自动化的部署也应该有人来监督。发布变更的人应该在发布后多检查几次，以确保情况良好。</p>
+<p>对于更大的公司来说，每周进行多次部署可能是一个简单的指标。但对于初创公司来说，最好坚持在预定的时间每周部署一次。</p>
+<p>你会发现：</p>
+<ul>
+<li>与日常部署相比，生产失败的风险降低了。</li>
+<li>节省了大量时间，以便用于开发新的功能。</li>
+<li>有规律的部署项目，让营销、运维和其他工作变得容易协调。</li>
+<li>给你做手动测试的时间。</li>
+</ul>
+<p>使用 Vercel 和 Render 这样的工具，部署过程可以像这样简单：</p>
+<ul>
+<li>将开发分支的变动部署到测试环境。</li>
+<li>将主分支的变动部署到生产环境。</li>
+<li>开发分支每周合并一次到主分支，以进行生产部署，其他更改则总是合并到开发分支。</li>
+</ul>
+<h3 id="冻结要发布的代码"><a href="#冻结要发布的代码" class="headerlink" title="冻结要发布的代码"></a>冻结要发布的代码</h3><p>这不是为了提高速度，而是为了使质量得到保证。对于我们的产品来说，测试工程师会在产品发布到生产环境之前对功能进行验证。通常情况下，团队至少应该在部署前一天停止合并可能影响生产版本的更改。</p>
+<p>这将为测试人员提高宝贵的时间来审查新的功能变动，并确保它们能按预期工作。大多数情况下，我们只是把合并新更改的工作暂停一天。</p>
+<h3 id="编写单元测试"><a href="#编写单元测试" class="headerlink" title="编写单元测试"></a>编写单元测试</h3><p>写单元测试是一个提升能力的好方法，可以让你对自己的代码更加自信。从长远来看，增加团队编写的单元测试数量将对软件的质量产生积极的影响。这可以帮助团队从每周部署一次变成两次甚至更多。</p>
+<p>单元测试减轻了测试团队的压力，因为他们可以更多的专注于测试边缘用例和复杂场景，而不是测试应用的基本功能，如登录或注册。当你在系统中进行大的改动时，单元测试可以确保系统更加安全以发布新的改动。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，总结一下能够提高快速发布快速交付的流程：</p>
+<ol>
+<li><p>自动化 CI/CD 流水线。节省大量手动发布时间并允许一天多次发布等。</p>
+</li>
+<li><p>使用单仓库架构。可以使你的项目保持清晰明了、整齐有序并且透明。</p>
+</li>
+<li><p>把功能特性尽可能分解到最小的增量的变动。可以确保得到及时的反馈，减少大方向的失误。</p>
+<ul>
+<li>产品团队应该把工作分成 1-2 天的任务。</li>
+<li>开发团队应该没天推送变更。</li>
+</ul>
+</li>
+<li><p>使用功能标志。</p>
+<ul>
+<li>开发团队不畏惧部署。</li>
+<li>你可以向 beta 用户推出新功能。</li>
+<li>你可以更快的从团队和外部用户那里获得反馈。</li>
+<li>你可以运行 a/b 测试和执行试验。</li>
+</ul>
+</li>
+<li><p>为每个功能特性指派产品和开发负责人。</p>
+<ul>
+<li>避免共担责任和交付延期。</li>
+<li>提升个人责任感激发团队潜力。</li>
+</ul>
+</li>
+<li><p>每周至少要求一次演示。鼓励团队尽早分享工作进度，提前发现 bug，便于在错误的路上走得更远。</p>
+<ul>
+<li>原型-预览-测试-预发布 —— 这是每个团队应该提供的流程演示。</li>
+<li>每个功能团队每周应该提供 1-2 个演示。</li>
+</ul>
+</li>
+<li><p>每周部署并遵循简单的 CI/CD 流程。</p>
+<ul>
+<li>使用单一开发分支，每次提交时部署到测试环境。</li>
+<li>每周将开发分支合并到主分支，以便部署到生产环境。</li>
+</ul>
+</li>
+<li><p>发版前进行封版。</p>
+<ul>
+<li>避免发生影响版本发布的改动，便于测试团队对该版本的功能进行测试并确保质量。</li>
+</ul>
+</li>
+<li><p>如果你刚刚开始，不要写太多单元测试。</p>
+<ul>
+<li>从长远来看，单元测试是很好的，但是在短期内会降低开发效率。</li>
+</ul>
+</li>
+</ol>
+<p><em>英文原文地址 :</em></p>
+<ul>
+<li><a href="https://growing-products.paralect.com/a-development-process-startup-founders-should-use-to-ship-features-weirdly-fast" target="_blank" rel="noopener">https://growing-products.paralect.com/a-development-process-startup-founders-should-use-to-ship-features-weirdly-fast</a></li>
+</ul>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.16.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'fe1e2afb500870f00186',
+        clientSecret: '98e65c5dde15bc2fe73f453a2c3dea6f13fc07c2',
+        id: md5(window.location.pathname),
+        repo: 'StrongerLph.github.io',
+        owner: 'StrongerLph',
+        admin: 'StrongerLph'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+<script src="/js/app.js?v=1669895886767"></script>
+  
+
+
+
+
+
+</body>
+
+</html>
